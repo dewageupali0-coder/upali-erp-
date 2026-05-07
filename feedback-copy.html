@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback – Copy & Paste</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Google Sans', Roboto, Arial, sans-serif;
+      background: #f0ebf8;
+      min-height: 100vh;
+      padding: 32px 12px 60px;
+    }
+
+    .wrapper { max-width: 680px; margin: 0 auto; }
+
+    .top-banner {
+      background: #fff;
+      border-radius: 8px 8px 0 0;
+      border-top: 10px solid #673ab7;
+      padding: 28px 24px 22px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+      margin-bottom: 2px;
+    }
+
+    .top-banner h1 { font-size: 22px; font-weight: 600; color: #202124; }
+    .top-banner p  { font-size: 13px; color: #5f6368; margin-top: 6px; line-height: 1.5; }
+
+    .staff-badge {
+      display: flex; align-items: center; gap: 12px;
+      background: #ede7f6; border-left: 4px solid #673ab7;
+      border-radius: 4px; padding: 12px 16px; margin-top: 16px;
+    }
+    .avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: #673ab7; color: #fff;
+      font-size: 18px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .staff-name  { font-weight: 700; color: #311b92; font-size: 15px; }
+    .staff-title { font-size: 12px; color: #4a148c; margin-top: 2px; }
+
+    /* ── Answer card ── */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px 20px 16px;
+      margin-top: 10px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .q-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: #673ab7;
+    }
+
+    .copy-btn {
+      flex-shrink: 0;
+      background: #673ab7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .copy-btn:hover   { background: #512da8; }
+    .copy-btn.copied  { background: #43a047; }
+
+    .answer-text {
+      font-size: 14px;
+      color: #202124;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .divider {
+      height: 1px;
+      background: #f1f3f4;
+      margin: 12px 0 0;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #9aa0a6;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="top-banner">
+    <h1>Feedback for Ms. Bismi</h1>
+    <p>Click <strong>Copy</strong> on each answer, then paste it into the matching Google Form field.</p>
+    <div class="staff-badge">
+      <div class="avatar">B</div>
+      <div>
+        <div class="staff-name">Ms. Bismi</div>
+        <div class="staff-title">Bank Account Opening – Relationship Officer</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Your Full Name</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">Upali Dewage</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Company / Organisation Name</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">Upali Immigration Consultant LLC</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Date of Service</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">April 23, 2026</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Overall Rating</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">5 out of 5 Stars ⭐⭐⭐⭐⭐</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Professionalism &amp; Attitude</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">Ms. Bismi demonstrated an extremely high level of professionalism throughout the entire bank account opening process. She was courteous, composed, and genuinely dedicated to ensuring everything was handled perfectly. Her attitude was welcoming and reassuring from start to finish.</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Knowledge &amp; Guidance</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">Ms. Bismi's knowledge was superb. She guided us through every step of the process with complete confidence and clarity. She never left a question unanswered and handled every detail with great expertise, making the entire experience smooth and straightforward.</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Speed &amp; Efficiency</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">The process was handled with remarkable speed. Ms. Bismi managed every stage efficiently without cutting corners, ensuring that all documentation and procedures were completed accurately and in a timely manner.</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">What Ms. Bismi Did Particularly Well</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">Ms. Bismi provided A-Z guidance throughout the entire bank account opening journey without any time limitations. Her support was truly unimaginable in its depth and completeness. She covered every single aspect — from documentation requirements to procedural steps — leaving absolutely nothing unexplained or unattended.</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Would You Recommend Ms. Bismi?</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">Absolutely yes, 100%. Without any hesitation, I would strongly recommend Ms. Bismi to anyone who requires banking assistance. Her level of service goes far beyond expectations.</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Personal Highlight / Compliment</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">The most impressive aspect of Ms. Bismi's service was her unlimited dedication. She gave us complete A-Z guidance without any time constraints, treating our company's banking needs as her top priority. Her patience, expertise, and genuine willingness to help made the entire experience truly remarkable and unforgettable.</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="q-label">Suggestions / Recommendation for Ms. Bismi</span>
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+    <div class="answer-text">Ms. Bismi must be elevated to a senior and influential position within her industry. Her extraordinary ability to support customers and her deep knowledge of banking processes would be a tremendous asset at a higher level. Promoting talent like hers will not only benefit individual customers but also contribute significantly to the overall growth and reputation of the banking industry.</div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="footer">
+    Upali ERP &nbsp;·&nbsp; Feedback prepared for Ms. Bismi – Bank Account Opening Service
+  </div>
+
+</div>
+
+<script>
+  function copyText(btn) {
+    const text = btn.closest('.card').querySelector('.answer-text').innerText;
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(function () {
+      // fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
