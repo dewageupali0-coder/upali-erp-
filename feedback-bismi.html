@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback – Bank Account Opening Assistance</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Google Sans', Roboto, Arial, sans-serif;
+      background: #f0ebf8;
+      min-height: 100vh;
+      padding: 32px 12px 60px;
+    }
+
+    .form-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ── Header banner ── */
+    .header-card {
+      background: #fff;
+      border-radius: 8px 8px 0 0;
+      border-top: 10px solid #673ab7;
+      padding: 28px 24px 20px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    }
+
+    .header-card h1 {
+      font-size: 26px;
+      font-weight: 500;
+      color: #202124;
+      margin-bottom: 8px;
+    }
+
+    .header-card p {
+      font-size: 14px;
+      color: #444746;
+      line-height: 1.5;
+    }
+
+    .header-card .required-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #c62828;
+    }
+
+    /* ── Staff info banner ── */
+    .staff-card {
+      background: #ede7f6;
+      border-left: 4px solid #673ab7;
+      border-radius: 4px;
+      padding: 14px 18px;
+      margin: 16px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .staff-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #673ab7;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .staff-info .name {
+      font-weight: 600;
+      color: #311b92;
+      font-size: 16px;
+    }
+
+    .staff-info .role {
+      font-size: 13px;
+      color: #4a148c;
+      margin-top: 2px;
+    }
+
+    /* ── Question cards ── */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    }
+
+    .card label.question {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      color: #202124;
+      margin-bottom: 14px;
+    }
+
+    .required-star {
+      color: #c62828;
+      margin-left: 3px;
+    }
+
+    /* Text inputs */
+    .card input[type="text"],
+    .card input[type="email"],
+    .card textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #9e9e9e;
+      padding: 6px 2px;
+      font-size: 14px;
+      color: #202124;
+      background: transparent;
+      outline: none;
+      transition: border-color .2s;
+      font-family: inherit;
+      resize: none;
+    }
+
+    .card input[type="text"]:focus,
+    .card input[type="email"]:focus,
+    .card textarea:focus {
+      border-bottom: 2px solid #673ab7;
+    }
+
+    .card textarea { min-height: 80px; }
+
+    /* Star rating */
+    .star-group {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .star-group input { display: none; }
+
+    .star-group label {
+      font-size: 32px;
+      color: #ccc;
+      cursor: pointer;
+      transition: color .15s;
+      margin-bottom: 0;
+      font-weight: normal;
+    }
+
+    .star-group input:checked ~ label,
+    .star-group label:hover,
+    .star-group label:hover ~ label {
+      color: #f9a825;
+    }
+
+    .star-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #757575;
+      margin-top: 4px;
+      padding: 0 2px;
+    }
+
+    /* Radio / checkbox options */
+    .option-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #202124;
+    }
+
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
+      accent-color: #673ab7;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Scale row */
+    .scale-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 6px;
+    }
+
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #757575;
+      margin-bottom: 6px;
+    }
+
+    .scale-row label {
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 0;
+      font-weight: normal;
+      font-size: 13px;
+    }
+
+    .scale-row input[type="radio"] {
+      display: block;
+      margin: 0 auto 4px;
+      accent-color: #673ab7;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Submit button */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .btn-submit {
+      background: #673ab7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 28px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: .25px;
+      transition: background .2s;
+      font-family: inherit;
+    }
+
+    .btn-submit:hover { background: #512da8; }
+
+    .btn-clear {
+      background: none;
+      border: none;
+      color: #673ab7;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: underline;
+    }
+
+    /* Success message */
+    .success-card {
+      display: none;
+      background: #fff;
+      border-radius: 8px;
+      padding: 40px 28px;
+      margin-top: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+      text-align: center;
+    }
+
+    .success-card .check-icon {
+      font-size: 56px;
+      color: #43a047;
+      margin-bottom: 16px;
+    }
+
+    .success-card h2 {
+      font-size: 22px;
+      font-weight: 500;
+      color: #202124;
+      margin-bottom: 10px;
+    }
+
+    .success-card p {
+      font-size: 14px;
+      color: #444746;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .form-footer {
+      text-align: center;
+      font-size: 12px;
+      color: #80868b;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 480px) {
+      .star-group label { font-size: 26px; }
+      .scale-row label { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-wrapper">
+
+  <!-- Header -->
+  <div class="header-card">
+    <h1>Service Feedback Form</h1>
+    <p>
+      We value your honest feedback on the bank account opening assistance
+      you received. Your response helps us recognise excellent service and
+      continue improving.
+    </p>
+    <p class="required-note">* Required</p>
+
+    <!-- Staff badge -->
+    <div class="staff-card">
+      <div class="staff-avatar">B</div>
+      <div class="staff-info">
+        <div class="name">Ms. Bismi</div>
+        <div class="role">Bank Account Opening – Relationship Officer</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form id="feedbackForm" novalidate>
+
+    <!-- 1. Your name -->
+    <div class="card">
+      <label class="question" for="yourName">
+        Your Full Name <span class="required-star">*</span>
+      </label>
+      <input type="text" id="yourName" name="yourName"
+             placeholder="Your answer" required />
+    </div>
+
+    <!-- 2. Company name -->
+    <div class="card">
+      <label class="question" for="companyName">
+        Company / Organisation Name <span class="required-star">*</span>
+      </label>
+      <input type="text" id="companyName" name="companyName"
+             placeholder="Your answer" required />
+    </div>
+
+    <!-- 3. Email -->
+    <div class="card">
+      <label class="question" for="email">
+        Email Address
+      </label>
+      <input type="email" id="email" name="email"
+             placeholder="example@company.com" />
+    </div>
+
+    <!-- 4. Date of service -->
+    <div class="card">
+      <label class="question" for="serviceDate">
+        Date of Bank Account Opening Assistance <span class="required-star">*</span>
+      </label>
+      <input type="text" id="serviceDate" name="serviceDate"
+             placeholder="e.g. 05 May 2026" required />
+    </div>
+
+    <!-- 5. Overall star rating -->
+    <div class="card">
+      <label class="question">
+        Overall Rating for Ms. Bismi's Service <span class="required-star">*</span>
+      </label>
+      <div class="star-group">
+        <input type="radio" id="s5" name="starRating" value="5" required />
+        <label for="s5" title="Excellent">&#9733;</label>
+        <input type="radio" id="s4" name="starRating" value="4" />
+        <label for="s4" title="Good">&#9733;</label>
+        <input type="radio" id="s3" name="starRating" value="3" />
+        <label for="s3" title="Average">&#9733;</label>
+        <input type="radio" id="s2" name="starRating" value="2" />
+        <label for="s2" title="Below Average">&#9733;</label>
+        <input type="radio" id="s1" name="starRating" value="1" />
+        <label for="s1" title="Poor">&#9733;</label>
+      </div>
+      <div class="star-labels">
+        <span>Poor</span>
+        <span>Excellent</span>
+      </div>
+    </div>
+
+    <!-- 6. Professionalism -->
+    <div class="card">
+      <label class="question">
+        Ms. Bismi's Professionalism &amp; Attitude
+        <span class="required-star">*</span>
+      </label>
+      <div class="option-list">
+        <label class="option-item">
+          <input type="radio" name="professionalism" value="Excellent" required />
+          Excellent – very professional and courteous throughout
+        </label>
+        <label class="option-item">
+          <input type="radio" name="professionalism" value="Good" />
+          Good – professional with minor areas to improve
+        </label>
+        <label class="option-item">
+          <input type="radio" name="professionalism" value="Average" />
+          Average – acceptable but could be more attentive
+        </label>
+        <label class="option-item">
+          <input type="radio" name="professionalism" value="NeedsImprovement" />
+          Needs Improvement
+        </label>
+      </div>
+    </div>
+
+    <!-- 7. Knowledge & guidance -->
+    <div class="card">
+      <label class="question">
+        Knowledge &amp; Guidance Provided
+        <span class="required-star">*</span>
+      </label>
+      <div class="option-list">
+        <label class="option-item">
+          <input type="radio" name="knowledge" value="VeryKnowledgeable" required />
+          Very knowledgeable – answered all queries confidently
+        </label>
+        <label class="option-item">
+          <input type="radio" name="knowledge" value="Knowledgeable" />
+          Knowledgeable – provided helpful guidance
+        </label>
+        <label class="option-item">
+          <input type="radio" name="knowledge" value="PartiallyKnowledgeable" />
+          Partially knowledgeable – had to seek assistance from others
+        </label>
+        <label class="option-item">
+          <input type="radio" name="knowledge" value="Insufficient" />
+          Insufficient guidance provided
+        </label>
+      </div>
+    </div>
+
+    <!-- 8. Speed of process (linear scale) -->
+    <div class="card">
+      <label class="question">
+        Speed &amp; Efficiency of the Account Opening Process
+        <span class="required-star">*</span>
+      </label>
+      <div class="scale-labels">
+        <span>Very Slow</span>
+        <span>Very Fast</span>
+      </div>
+      <div class="scale-row">
+        <label><input type="radio" name="speed" value="1" required />1</label>
+        <label><input type="radio" name="speed" value="2" />2</label>
+        <label><input type="radio" name="speed" value="3" />3</label>
+        <label><input type="radio" name="speed" value="4" />4</label>
+        <label><input type="radio" name="speed" value="5" />5</label>
+      </div>
+    </div>
+
+    <!-- 9. What Ms. Bismi did well (checkboxes) -->
+    <div class="card">
+      <label class="question">
+        What did Ms. Bismi do particularly well? (Select all that apply)
+      </label>
+      <div class="option-list">
+        <label class="option-item">
+          <input type="checkbox" name="strengths" value="ClearCommunication" />
+          Clear and easy-to-understand communication
+        </label>
+        <label class="option-item">
+          <input type="checkbox" name="strengths" value="DocumentGuidance" />
+          Thorough guidance on required documents
+        </label>
+        <label class="option-item">
+          <input type="checkbox" name="strengths" value="Patience" />
+          Patience and willingness to answer all questions
+        </label>
+        <label class="option-item">
+          <input type="checkbox" name="strengths" value="FollowUp" />
+          Timely follow-up and proactive updates
+        </label>
+        <label class="option-item">
+          <input type="checkbox" name="strengths" value="Accuracy" />
+          Accuracy in completing paperwork / forms
+        </label>
+        <label class="option-item">
+          <input type="checkbox" name="strengths" value="FriendlyApproach" />
+          Friendly and welcoming approach
+        </label>
+      </div>
+    </div>
+
+    <!-- 10. Recommendation -->
+    <div class="card">
+      <label class="question">
+        Would you recommend Ms. Bismi to others who need banking assistance?
+        <span class="required-star">*</span>
+      </label>
+      <div class="option-list">
+        <label class="option-item">
+          <input type="radio" name="recommend" value="DefinitelyYes" required />
+          Definitely Yes
+        </label>
+        <label class="option-item">
+          <input type="radio" name="recommend" value="ProbablyYes" />
+          Probably Yes
+        </label>
+        <label class="option-item">
+          <input type="radio" name="recommend" value="NotSure" />
+          Not Sure
+        </label>
+        <label class="option-item">
+          <input type="radio" name="recommend" value="No" />
+          No
+        </label>
+      </div>
+    </div>
+
+    <!-- 11. Positive highlight -->
+    <div class="card">
+      <label class="question" for="highlight">
+        Share a specific moment or action by Ms. Bismi that impressed you most:
+      </label>
+      <textarea id="highlight" name="highlight"
+                placeholder="Your answer"></textarea>
+    </div>
+
+    <!-- 12. Suggestions -->
+    <div class="card">
+      <label class="question" for="suggestions">
+        Any suggestions for further improvement:
+      </label>
+      <textarea id="suggestions" name="suggestions"
+                placeholder="Your answer"></textarea>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button type="submit" class="btn-submit">Submit Feedback</button>
+      <button type="button" class="btn-clear"
+              onclick="document.getElementById('feedbackForm').reset()">
+        Clear form
+      </button>
+    </div>
+
+  </form>
+
+  <!-- Success message (shown after submit) -->
+  <div class="success-card" id="successCard">
+    <div class="check-icon">&#10003;</div>
+    <h2>Thank you for your feedback!</h2>
+    <p>
+      Your response has been recorded. We sincerely appreciate the time you
+      took to share your experience with <strong>Ms. Bismi</strong>.<br /><br />
+      Your feedback helps us celebrate outstanding service and continue
+      improving our banking assistance process.
+    </p>
+  </div>
+
+  <div class="form-footer">
+    Powered by Upali ERP &nbsp;|&nbsp; Feedback is confidential and used for internal service evaluation only.
+  </div>
+
+</div><!-- /form-wrapper -->
+
+<script>
+  document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Basic required-field validation
+    const required = this.querySelectorAll('[required]');
+    let valid = true;
+
+    required.forEach(function (field) {
+      if (field.type === 'radio') {
+        const group = document.querySelectorAll('[name="' + field.name + '"]');
+        const checked = Array.from(group).some(r => r.checked);
+        if (!checked) { valid = false; }
+      } else {
+        if (!field.value.trim()) { valid = false; }
+      }
+    });
+
+    if (!valid) {
+      alert('Please fill in all required fields (marked with *) before submitting.');
+      return;
+    }
+
+    // Collect and display
+    this.style.display = 'none';
+    document.getElementById('successCard').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Log to console (replace with your API call / backend POST)
+    const data = new FormData(this);
+    const result = {};
+    data.forEach((v, k) => {
+      if (result[k]) {
+        result[k] = [].concat(result[k], v);
+      } else {
+        result[k] = v;
+      }
+    });
+    console.log('Feedback submitted:', result);
+  });
+</script>
+</body>
+</html>
