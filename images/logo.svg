@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5c842;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4920a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a7a3b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3a1a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(0,0,0,0.25)"/>
+    </filter>
+  </defs>
+
+  <!-- White background -->
+  <rect width="500" height="500" fill="#ffffff"/>
+
+  <!-- Globe circle outline -->
+  <circle cx="250" cy="185" r="148" fill="none" stroke="#1a5c2b" stroke-width="6"/>
+
+  <!-- Green swoosh arcs on globe -->
+  <path d="M 130 120 Q 200 60 320 90 Q 380 110 400 185" fill="none" stroke="#1a5c2b" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 115 230 Q 170 320 260 330 Q 340 335 390 270" fill="none" stroke="#f0a500" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Continent silhouette shapes (simplified) -->
+  <ellipse cx="275" cy="145" rx="38" ry="28" fill="#1a5c2b" opacity="0.7"/>
+  <ellipse cx="320" cy="175" rx="22" ry="16" fill="#1a5c2b" opacity="0.6"/>
+  <ellipse cx="230" cy="130" rx="18" ry="12" fill="#1a5c2b" opacity="0.5"/>
+  <ellipse cx="185" cy="160" rx="14" ry="10" fill="#1a5c2b" opacity="0.4"/>
+
+  <!-- Airplane (top right of globe) -->
+  <g transform="translate(368,112) rotate(-35)">
+    <path d="M0,0 L28,-8 L30,0 L28,8 Z" fill="#1a5c2b"/>
+    <path d="M8,-4 L18,-14 L22,-10 L14,0 Z" fill="#1a5c2b"/>
+    <path d="M4,2 L12,12 L16,10 L10,2 Z" fill="#1a5c2b"/>
+    <rect x="22" y="-2" width="8" height="4" rx="1" fill="#1a5c2b"/>
+  </g>
+
+  <!-- Ship (bottom right of globe) -->
+  <g transform="translate(340,285)">
+    <rect x="0" y="0" width="68" height="22" rx="3" fill="#1a5c2b"/>
+    <rect x="10" y="-16" width="20" height="18" rx="2" fill="#1a5c2b"/>
+    <rect x="34" y="-10" width="14" height="12" rx="1" fill="#1a5c2b"/>
+    <path d="M -8 22 Q 34 32 76 22" fill="#1a5c2b" opacity="0.5"/>
+  </g>
+
+  <!-- Gold lion body (centre of globe) -->
+  <g filter="url(#shadow)">
+    <!-- Body -->
+    <ellipse cx="220" cy="195" rx="40" ry="35" fill="url(#goldGrad)"/>
+    <!-- Head -->
+    <circle cx="215" cy="158" r="28" fill="url(#goldGrad)"/>
+    <!-- Mane spikes -->
+    <g fill="#d4920a">
+      <ellipse cx="200" cy="148" rx="10" ry="16" transform="rotate(-30,200,148)"/>
+      <ellipse cx="215" cy="138" rx="10" ry="18" transform="rotate(0,215,138)"/>
+      <ellipse cx="230" cy="148" rx="10" ry="16" transform="rotate(30,230,148)"/>
+      <ellipse cx="238" cy="162" rx="9" ry="14" transform="rotate(50,238,162)"/>
+      <ellipse cx="192" cy="162" rx="9" ry="14" transform="rotate(-50,192,162)"/>
+    </g>
+    <!-- Mane overlay -->
+    <circle cx="215" cy="162" r="22" fill="url(#goldGrad)"/>
+    <!-- Eye -->
+    <circle cx="220" cy="157" r="4" fill="#7a4800"/>
+    <circle cx="221" cy="156" r="1.5" fill="#fff"/>
+    <!-- Snout -->
+    <ellipse cx="228" cy="166" rx="8" ry="6" fill="#c8820a"/>
+    <!-- Front leg -->
+    <rect x="195" y="215" width="16" height="30" rx="6" fill="url(#goldGrad)"/>
+    <!-- Tail -->
+    <path d="M 255 210 Q 290 190 285 160 Q 282 148 275 152" fill="none" stroke="url(#goldGrad)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M 275 145 Q 280 135 285 140 Q 282 150 278 155" fill="url(#goldGrad)"/>
+    <!-- Hind legs -->
+    <ellipse cx="250" cy="225" rx="14" ry="10" fill="#c8820a"/>
+    <rect x="244" y="220" width="12" height="28" rx="5" fill="url(#goldGrad)"/>
+  </g>
+
+  <!-- Sword held by lion -->
+  <g transform="translate(175,130) rotate(-20)">
+    <!-- Blade -->
+    <rect x="-3" y="-70" width="6" height="80" rx="2" fill="#e8d080"/>
+    <!-- Cross guard -->
+    <rect x="-16" y="5" width="32" height="7" rx="3" fill="#c8a020"/>
+    <!-- Handle -->
+    <rect x="-4" y="10" width="8" height="28" rx="2" fill="#a06010"/>
+    <!-- Pommel -->
+    <circle cx="0" cy="40" r="7" fill="#c8a020"/>
+    <!-- Blade tip -->
+    <polygon points="0,-70 -3,-50 3,-50" fill="#d4c060"/>
+  </g>
+
+  <!-- Decorative gold wave at bottom of globe -->
+  <path d="M 105 270 Q 175 295 250 270 Q 325 245 395 270" fill="none" stroke="#f0a500" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- ---- TEXT SECTION ---- -->
+  <!-- Horizontal gold lines flanking UPALI -->
+  <line x1="60" y1="360" x2="160" y2="360" stroke="#f0a500" stroke-width="2.5"/>
+  <line x1="340" y1="360" x2="440" y2="360" stroke="#f0a500" stroke-width="2.5"/>
+
+  <!-- UPALI text -->
+  <text x="250" y="375" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="72" font-weight="bold" letter-spacing="8" fill="#1a5c2b">UPALI</text>
+
+  <!-- Subtitle -->
+  <text x="250" y="400" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="14.5" letter-spacing="3" fill="#1a5c2b" font-weight="600">IMMIGRATION SERVICE CONSULTANCY</text>
+
+  <!-- Gold dot separator -->
+  <circle cx="250" cy="418" r="4" fill="#f0a500"/>
+
+  <!-- Tagline -->
+  <text x="250" y="437" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="11.5" letter-spacing="2.5" fill="#1a5c2b">IMMIGRATION SOLUTIONS  •  LOGISTICS CONNECTING WORLDS</text>
+
+  <!-- Signature -->
+  <text x="250" y="476" text-anchor="middle" font-family="Georgia, 'Palatino Linotype', cursive"
+        font-size="30" fill="#1a5c2b" font-style="italic">Upali Dewage</text>
+
+  <!-- Underline beneath signature -->
+  <path d="M 145 484 Q 250 492 355 484" fill="none" stroke="#1a5c2b" stroke-width="1.8"/>
+</svg>
