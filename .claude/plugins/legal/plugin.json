@@ -1,0 +1,12 @@
+{
+  "name": "legal",
+  "version": "1.0.0",
+  "description": "Legal compliance and risk assessment plugin for Upali Immigration Service Consultancy",
+  "company": "Upali Immigration Service Consultancy",
+  "jurisdiction": "UAE (Free Zone)",
+  "license_type": "Trade License – Free Zone",
+  "business_type": "Immigration Consultancy",
+  "skills": [
+    "legal-risk-assessment"
+  ]
+}
