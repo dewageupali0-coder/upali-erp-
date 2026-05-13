@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UAE VAT Compliance Memo – Upali Immigration Service Consultancy</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 13px;
+      color: #1a1a1a;
+      background: #f0f2f5;
+    }
+
+    /* ── Toolbar (hidden on print) ── */
+    .toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #1a3a5c;
+      color: #fff;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+    .toolbar span { font-size: 14px; font-weight: 600; letter-spacing: .3px; }
+    .toolbar-btns { display: flex; gap: 10px; }
+    .btn-dl, .btn-print {
+      padding: 7px 18px;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-dl    { background: #c9973a; color: #fff; }
+    .btn-print { background: #fff;    color: #1a3a5c; }
+    .btn-dl:hover    { background: #b07e2a; }
+    .btn-print:hover { background: #e8edf2; }
+
+    /* ── Page ── */
+    .page {
+      max-width: 860px;
+      margin: 72px auto 40px;
+      background: #fff;
+      padding: 52px 60px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+    }
+
+    /* ── Header ── */
+    .memo-header {
+      border-bottom: 3px solid #1a3a5c;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    .memo-header .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .memo-header .logo-row img { height: 52px; }
+    .memo-header .company-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a3a5c;
+      line-height: 1.3;
+    }
+    .memo-header .company-name small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: #666;
+      letter-spacing: .3px;
+    }
+
+    .memo-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #c9973a;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+    .meta-table td { padding: 4px 8px; font-size: 12.5px; vertical-align: top; }
+    .meta-table td:first-child { font-weight: 700; color: #1a3a5c; width: 110px; white-space: nowrap; }
+    .meta-table tr:nth-child(odd) td { background: #f7f9fb; }
+
+    /* ── Sections ── */
+    h2 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #fff;
+      background: #1a3a5c;
+      padding: 7px 12px;
+      margin: 22px 0 10px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a3a5c;
+      margin: 14px 0 6px;
+      border-left: 4px solid #c9973a;
+      padding-left: 8px;
+    }
+    p { line-height: 1.7; margin-bottom: 8px; }
+
+    /* ── Callout ── */
+    .callout {
+      background: #fff8ec;
+      border-left: 5px solid #c9973a;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+    .callout strong { color: #b07000; }
+
+    /* ── Tables ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px;
+      font-size: 12px;
+    }
+    thead th {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 600;
+    }
+    tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e0e6ed;
+      vertical-align: top;
+    }
+    tbody tr:nth-child(even) td { background: #f7f9fb; }
+
+    /* ── Invoice box ── */
+    .invoice-box {
+      background: #f7f9fb;
+      border: 1px solid #d0dae6;
+      border-radius: 4px;
+      padding: 14px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 11.5px;
+      line-height: 1.9;
+      margin: 10px 0 16px;
+      white-space: pre;
+    }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; padding: 0; margin: 8px 0 14px; }
+    .checklist li {
+      padding: 5px 0 5px 28px;
+      position: relative;
+      border-bottom: 1px dashed #e0e6ed;
+      font-size: 12.5px;
+    }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 4px; top: 8px;
+      width: 14px; height: 14px;
+      border: 2px solid #1a3a5c;
+      border-radius: 2px;
+      background: #fff;
+    }
+
+    /* ── Risk table colours ── */
+    .risk-high  { color: #c0392b; font-weight: 700; }
+    .risk-med   { color: #e67e22; font-weight: 700; }
+
+    /* ── Signature block ── */
+    .sig-block {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 2px solid #1a3a5c;
+      display: flex;
+      gap: 40px;
+      font-size: 12px;
+    }
+    .sig-line { flex: 1; }
+    .sig-line .label { color: #666; margin-bottom: 24px; }
+    .sig-line .line  { border-top: 1px solid #aaa; padding-top: 4px; font-weight: 700; color: #1a3a5c; }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      background: #f0f2f5;
+      border: 1px solid #d0dae6;
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #555;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    .footer-bar {
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      margin-top: 22px;
+      padding-top: 12px;
+      border-top: 1px solid #e0e6ed;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #fff; font-size: 11.5px; }
+      .toolbar { display: none; }
+      .page { margin: 0; padding: 28px 32px; box-shadow: none; max-width: 100%; }
+      h2 { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .callout, .invoice-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <span>UAE VAT Compliance Memo &mdash; Upali Immigration Service Consultancy</span>
+  <div class="toolbar-btns">
+    <button class="btn-print" onclick="window.print()">&#128438; Print / Save as PDF</button>
+    <a class="btn-dl" href="vat-compliance-memo.html" download="UAE_VAT_Compliance_Memo_Upali.html">&#8681; Download</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="memo-header">
+    <div class="logo-row">
+      <img src="images/logo.png" alt="Upali Immigration Service Consultancy Logo" />
+      <div class="company-name">
+        Upali Immigration Service Consultancy
+        <small>Trade License &ndash; UAE Free Zone &nbsp;|&nbsp; Immigration Consultancy</small>
+      </div>
+    </div>
+    <div class="memo-title">Internal Compliance Memo</div>
+    <table class="meta-table">
+      <tr><td>TO</td><td>Management &amp; Billing Team</td></tr>
+      <tr><td>FROM</td><td>Legal &amp; Compliance &ndash; Upali Immigration Service Consultancy</td></tr>
+      <tr><td>DATE</td><td>13 May 2026</td></tr>
+      <tr><td>SUBJECT</td><td>UAE VAT Charging Guidelines &ndash; Immigration Consultancy Services (AED 15,000 Package)</td></tr>
+      <tr><td>REFERENCE</td><td>UAE Federal Decree-Law No. 8 of 2017 on Value Added Tax</td></tr>
+      <tr><td>CLASS</td><td>Internal &ndash; Confidential</td></tr>
+    </table>
+  </div>
+
+  <!-- 1. Purpose -->
+  <h2>1. Purpose</h2>
+  <p>This memo establishes clear guidelines on when and how Value Added Tax (VAT) must be charged to clients of Upali Immigration Service Consultancy. It applies to all immigration service packages, including the standard <strong>AED 15,000 all-inclusive package</strong> covering consultancy for migration to Europe, New Zealand, and Canada.</p>
+
+  <!-- 2. Company Position -->
+  <h2>2. Company Background &amp; Regulatory Position</h2>
+  <table>
+    <thead><tr><th>Detail</th><th>Information</th></tr></thead>
+    <tbody>
+      <tr><td>Company Name</td><td>Upali Immigration Service Consultancy</td></tr>
+      <tr><td>License Type</td><td>Trade License &ndash; UAE Free Zone</td></tr>
+      <tr><td>Business Activity</td><td>Immigration Consultancy</td></tr>
+      <tr><td>Governing VAT Law</td><td>UAE Federal Decree-Law No. 8 of 2017</td></tr>
+      <tr><td>Standard VAT Rate</td><td>5%</td></tr>
+      <tr><td>Mandatory Registration Threshold</td><td>AED 375,000 per annum (~25 clients/year)</td></tr>
+      <tr><td>Voluntary Registration Threshold</td><td>AED 187,500 per annum (~12 clients/year)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <strong>Important:</strong> Holding a Free Zone Trade License does <strong>not</strong> exempt the company from UAE VAT obligations. Free Zone exemptions apply to goods in designated customs zones only &mdash; <strong>not</strong> to professional services such as immigration consultancy.
+  </div>
+
+  <!-- 3. Package Breakdown -->
+  <h2>3. Service Package Breakdown (AED 15,000 Per Client)</h2>
+  <p>The package must always be invoiced as <strong>itemized components</strong> &mdash; never as a single lump sum. Each component carries a different VAT treatment:</p>
+  <table>
+    <thead><tr><th>#</th><th>Component</th><th>Indicative Amount (AED)</th><th>VAT Category</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Consultancy Fee</td><td>8,000</td><td>Standard Rated 5% or Zero-Rated 0% (see Section 4)</td></tr>
+      <tr><td>2</td><td>Visa Application Fee</td><td>3,000</td><td>Out of Scope (Government Disbursement)</td></tr>
+      <tr><td>3</td><td>Embassy Appointment Fee</td><td>1,000</td><td>Out of Scope (Government Disbursement)</td></tr>
+      <tr><td>4</td><td>International Air Ticket</td><td>3,000</td><td>Zero Rated 0% (Article 45(3))</td></tr>
+      <tr><td></td><td><strong>Total Package</strong></td><td><strong>15,000</strong></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- 4. VAT Rules -->
+  <h2>4. VAT Charging Rules by Client Type</h2>
+
+  <h3>4.1 UAE-Resident Clients (Inside UAE) &mdash; Charge 5% VAT on Consultancy Fee</h3>
+  <p><strong>Legal Basis:</strong> Article 29, UAE VAT Law &mdash; place of supply is UAE; standard rate applies.</p>
+  <ul style="margin:6px 0 10px 20px; line-height:1.8; font-size:12.5px;">
+    <li>Government fees (visa fee, embassy appointment fee) are <strong>out of scope</strong> &mdash; disbursements paid on behalf of the client.</li>
+    <li>International air tickets are <strong>zero-rated</strong> under Article 45(3), UAE VAT Law.</li>
+  </ul>
+  <p><strong>Sample Tax Invoice &mdash; UAE Resident Client:</strong></p>
+  <div class="invoice-box">INVOICE TO: [UAE Resident Client Name]
+
+  Consultancy Fee                    AED  8,000.00
+  VAT @ 5% on Consultancy Fee        AED    400.00
+  ──────────────────────────────────────────────────
+  Visa Application Fee               AED  3,000.00   (Disbursement – No VAT)
+  Embassy Appointment Fee            AED  1,000.00   (Disbursement – No VAT)
+  International Air Ticket           AED  3,000.00   (Zero-Rated – VAT 0%)
+  ──────────────────────────────────────────────────
+  TOTAL DUE                          AED 15,400.00</div>
+
+  <h3>4.2 Outside-UAE Clients (Non-UAE Residents) &mdash; Zero-Rate the Consultancy Fee</h3>
+  <p><strong>Legal Basis:</strong> Article 31, UAE VAT Executive Regulations &mdash; export of services is zero-rated when <em>all four conditions</em> are met:</p>
+  <ol style="margin:6px 0 10px 24px; line-height:1.9; font-size:12.5px;">
+    <li>The customer has a place of residence <strong>outside the UAE</strong>.</li>
+    <li>The customer does <strong>not</strong> have a place of establishment or fixed establishment in the UAE.</li>
+    <li>The customer is <strong>outside the UAE</strong> at the time the services are performed.</li>
+    <li>The service is <strong>not directly related</strong> to real estate or movable assets located in the UAE.</li>
+  </ol>
+  <div class="callout">
+    <strong>Risk:</strong> If the client visits UAE at any point during the service period (e.g., biometric appointment), the supply may become standard-rated at 5%. Reassess before invoicing.
+  </div>
+  <p><strong>Sample Invoice &mdash; Outside-UAE Client (Zero-Rated):</strong></p>
+  <div class="invoice-box">INVOICE TO: [Foreign Client Name – Country of Residence]
+
+  Consultancy Fee                    AED  8,000.00   (Zero-Rated – Export of Services)
+  VAT                                AED      0.00
+  ──────────────────────────────────────────────────
+  Visa Application Fee               AED  3,000.00   (Disbursement – No VAT)
+  Embassy Appointment Fee            AED  1,000.00   (Disbursement – No VAT)
+  International Air Ticket           AED  3,000.00   (Zero-Rated – VAT 0%)
+  ──────────────────────────────────────────────────
+  TOTAL DUE                          AED 15,000.00
+
+  Zero-rating applied pursuant to Article 31, UAE VAT Executive Regulations.</div>
+
+  <h3>4.3 Summary Decision Table</h3>
+  <table>
+    <thead><tr><th>Client Type</th><th>Consultancy Fee</th><th>Visa / Embassy Fee</th><th>Air Ticket</th><th>Invoice Total</th></tr></thead>
+    <tbody>
+      <tr><td>UAE Resident</td><td>5% VAT</td><td>No VAT</td><td>0%</td><td><strong>AED 15,400</strong></td></tr>
+      <tr><td>Outside-UAE (conditions met)</td><td>0% Zero-Rated</td><td>No VAT</td><td>0%</td><td><strong>AED 15,000</strong></td></tr>
+      <tr><td>Outside-UAE (visited UAE)</td><td>5% VAT</td><td>No VAT</td><td>0%</td><td><strong>AED 15,400</strong></td></tr>
+    </tbody>
+  </table>
+
+  <!-- 5. Documentation -->
+  <h2>5. Mandatory Documentation for Zero-Rating (Outside-UAE Clients)</h2>
+  <p>Collect and file all four documents <strong>before</strong> issuing a zero-rated invoice:</p>
+  <ul class="checklist">
+    <li>Copy of valid foreign passport (showing no UAE residency visa)</li>
+    <li>Proof of foreign residential address (utility bill, bank statement &mdash; not older than 3 months)</li>
+    <li>Signed service agreement stating the client's domicile is outside the UAE</li>
+    <li>Written declaration confirming client did not enter UAE during the service period</li>
+  </ul>
+  <div class="callout"><strong>Retention:</strong> All documents must be kept for a minimum of <strong>5 years</strong> (Article 78, UAE VAT Law).</div>
+
+  <!-- 6. Invoice Requirements -->
+  <h2>6. Invoice Requirements (Article 59, UAE VAT Executive Regulations)</h2>
+  <ul class="checklist">
+    <li>The words <strong>"Tax Invoice"</strong> on the document</li>
+    <li>Company name, address, and Tax Registration Number (TRN) once registered</li>
+    <li>Client's name and address</li>
+    <li>Invoice date and unique sequential invoice number</li>
+    <li>Description of each supply with quantity and unit price</li>
+    <li>VAT rate applied to each line item and the VAT amount in AED</li>
+    <li>Total amount payable in AED</li>
+    <li>For zero-rated supplies: state reason — "Zero-Rated Export of Services – Article 31"</li>
+  </ul>
+
+  <!-- 7. Registration -->
+  <h2>7. VAT Registration Obligation</h2>
+  <table>
+    <thead><tr><th>Threshold</th><th>Amount (AED)</th><th>Approx. Client Count</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Voluntary</td><td>187,500</td><td>~12 clients/year</td><td>May register voluntarily</td></tr>
+      <tr><td><strong>Mandatory</strong></td><td><strong>375,000</strong></td><td><strong>~25 clients/year</strong></td><td><strong class="risk-high">Must register before crossing</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Penalty for late registration: AED 20,000.</strong> Finance team must track cumulative taxable turnover monthly.</div>
+
+  <!-- 8. Risk Table -->
+  <h2>8. Key Compliance Risks &amp; Mitigations</h2>
+  <table>
+    <thead><tr><th>Risk</th><th>Level</th><th>Consequence</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Not charging VAT to UAE-resident clients</td>
+        <td><span class="risk-high">HIGH</span></td>
+        <td>FTA penalty + back VAT + surcharge</td>
+        <td>Always charge 5% on consultancy fee for UAE residents</td>
+      </tr>
+      <tr>
+        <td>Zero-rating without sufficient documentation</td>
+        <td><span class="risk-high">HIGH</span></td>
+        <td>FTA disallows zero-rating; penalty applies</td>
+        <td>Collect all 4 documents in Section 5 before invoicing</td>
+      </tr>
+      <tr>
+        <td>Bundled single-line invoice (AED 15,000)</td>
+        <td><span class="risk-high">HIGH</span></td>
+        <td>Incorrect VAT; FTA audit exposure</td>
+        <td>Always itemize into 4 components</td>
+      </tr>
+      <tr>
+        <td>Failing to register before threshold</td>
+        <td><span class="risk-high">HIGH</span></td>
+        <td>AED 20,000 penalty</td>
+        <td>Monthly turnover tracking</td>
+      </tr>
+      <tr>
+        <td>Foreign client visits UAE during service</td>
+        <td><span class="risk-med">MEDIUM</span></td>
+        <td>Zero-rating becomes invalid</td>
+        <td>Re-assess and apply 5% if client enters UAE</td>
+      </tr>
+      <tr>
+        <td>Assuming Free Zone = VAT exempt</td>
+        <td><span class="risk-med">MEDIUM</span></td>
+        <td>Non-compliance with VAT Law</td>
+        <td>Free Zone License does not exempt services from VAT</td>
+      </tr>
+      <tr>
+        <td>Poor record-keeping</td>
+        <td><span class="risk-med">MEDIUM</span></td>
+        <td>FTA audit failure</td>
+        <td>Retain all records for 5 years minimum</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 9. Action Checklist -->
+  <h2>9. Billing Team Action Checklist (Per Invoice)</h2>
+  <ul class="checklist">
+    <li>Identify client type: UAE resident OR outside-UAE resident</li>
+    <li>If outside-UAE: collect all 4 mandatory documents (Section 5) before zero-rating</li>
+    <li>Break down the AED 15,000 package into its 4 components on the invoice</li>
+    <li>Apply correct VAT rate to each component (refer to Section 4)</li>
+    <li>Ensure Tax Invoice contains all required fields (Section 6)</li>
+    <li>File client documents in compliance records folder</li>
+    <li>Update monthly turnover tracker</li>
+  </ul>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> This memo provides internal guidance based on UAE Federal Decree-Law No. 8 of 2017 on Value Added Tax and its Executive Regulations. It does not constitute formal legal or tax advice. The company should engage an <strong>FTA-registered Tax Agent</strong> for formal binding guidance and VAT registration assistance.
+  </div>
+
+  <!-- Signature Block -->
+  <div class="sig-block">
+    <div class="sig-line">
+      <div class="label">Prepared by: Legal &amp; Compliance Team</div>
+      <div class="line">Signature &amp; Date</div>
+    </div>
+    <div class="sig-line">
+      <div class="label">Approved by: Management</div>
+      <div class="line">Signature &amp; Date</div>
+    </div>
+    <div class="sig-line">
+      <div class="label">Next Review Date</div>
+      <div class="line">13 May 2027</div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    Upali Immigration Service Consultancy &mdash; Internal Document &mdash; Do Not Distribute
+  </div>
+
+</div>
+</body>
+</html>

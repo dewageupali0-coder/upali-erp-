@@ -1,0 +1,154 @@
+{
+  "skill": "legal-risk-assessment",
+  "plugin": "legal",
+  "version": "1.0.0",
+  "company_profile": {
+    "name": "Upali Immigration Service Consultancy",
+    "license": "Trade License – UAE Free Zone",
+    "business_activity": "Immigration Consulting",
+    "client_segments": [
+      "UAE residents seeking migration (Inside UAE clients)",
+      "Non-UAE residents seeking migration (Outside UAE clients)"
+    ],
+    "destination_countries": ["Europe", "New Zealand", "Canada"],
+    "service_package": {
+      "description": "All-inclusive immigration consultancy package",
+      "components": [
+        {
+          "item": "Consultancy Fee",
+          "vat_treatment": "Standard Rated – 5%",
+          "notes": "Professional service rendered in UAE; taxable regardless of client residency status for UAE-based clients."
+        },
+        {
+          "item": "Visa Application Fee",
+          "vat_treatment": "Out of Scope / Government Fee Pass-Through",
+          "notes": "Third-party government fees passed to the client are typically out of scope for UAE VAT. Disbursements paid on behalf of clients are not subject to VAT if billed at cost as a pure reimbursement (no markup)."
+        },
+        {
+          "item": "Embassy Appointment Fee",
+          "vat_treatment": "Out of Scope / Government Fee Pass-Through",
+          "notes": "Same as Visa Fee – government-imposed fee. Ensure the invoice clearly separates this from your consultancy fee."
+        },
+        {
+          "item": "Air Ticket",
+          "vat_treatment": "Zero Rated – 0%",
+          "notes": "International passenger air transport is zero-rated under Article 45(3) of UAE Federal Decree-Law No. 8 of 2017. If you procure the ticket as an agent, it is out of scope; if procured as a principal and re-charged, it is zero-rated."
+        }
+      ],
+      "total_per_client_aed": 15000
+    }
+  },
+  "vat_risk_assessment": {
+    "applicable_law": "UAE Federal Decree-Law No. 8 of 2017 on Value Added Tax",
+    "standard_rate": "5%",
+    "vat_registration_threshold_aed": 375000,
+    "voluntary_registration_threshold_aed": 187500,
+    "free_zone_note": "A UAE Free Zone Trade License does NOT exempt a business from VAT obligations unless the Free Zone is a FTA-designated 'Designated Zone' (typically for goods, not services). Immigration consultancy services provided from a Free Zone are fully subject to standard UAE VAT rules.",
+    "scenarios": [
+      {
+        "id": "SCENARIO-01",
+        "client_type": "UAE Resident / Inside UAE Client",
+        "client_location_at_time_of_service": "United Arab Emirates",
+        "vat_obligation": "CHARGE VAT at 5%",
+        "legal_basis": "Article 29, UAE VAT Law – Place of supply of services is UAE; standard rate applies.",
+        "risk_level": "HIGH if VAT not charged",
+        "recommendation": "Always issue a Tax Invoice with 5% VAT for UAE-resident clients. Failure to charge VAT exposes you to FTA penalties under Article 56 of the VAT Law.",
+        "invoice_example": {
+          "consultancy_fee_aed": 8000,
+          "visa_fee_aed": 3000,
+          "embassy_appointment_fee_aed": 1000,
+          "air_ticket_aed": 3000,
+          "subtotal_taxable_aed": 8000,
+          "vat_5pct_on_consultancy_aed": 400,
+          "zero_rated_air_ticket_aed": 3000,
+          "out_of_scope_govt_fees_aed": 4000,
+          "total_invoice_aed": 15400,
+          "notes": "VAT charged only on consultancy fee. Govt fees separated as disbursements. Air ticket zero-rated."
+        }
+      },
+      {
+        "id": "SCENARIO-02",
+        "client_type": "Non-UAE Resident / Outside UAE Client",
+        "client_location_at_time_of_service": "Outside UAE",
+        "vat_obligation": "ZERO RATED – 0% (conditions must be met)",
+        "legal_basis": "Article 31, UAE Executive Regulations – Export of Services is zero-rated when: (1) customer is outside UAE; (2) customer does not have a place of establishment or fixed establishment in UAE; (3) customer is outside UAE at time of service; (4) service is not directly related to real estate or movable assets in UAE.",
+        "risk_level": "MEDIUM – zero-rating requires documented proof",
+        "recommendation": "If the client never enters UAE and all services are rendered remotely, zero-rate the supply. Maintain documentation: passport copies, foreign address proof, communication records. If client visits UAE during service delivery, re-evaluate and apply standard rating.",
+        "required_documentation": [
+          "Copy of client's foreign passport",
+          "Proof of foreign residential address (utility bill, bank statement)",
+          "Signed service agreement indicating client domicile outside UAE",
+          "No UAE residency visa / Emirates ID"
+        ],
+        "invoice_example": {
+          "consultancy_fee_aed": 8000,
+          "visa_fee_aed": 3000,
+          "embassy_appointment_fee_aed": 1000,
+          "air_ticket_aed": 3000,
+          "vat_aed": 0,
+          "total_invoice_aed": 15000,
+          "notes": "Zero-rated export of service. Quote zero-rated status on invoice with reference to Article 31 UAE VAT Executive Regulations."
+        }
+      },
+      {
+        "id": "SCENARIO-03",
+        "client_type": "Non-UAE Resident who visits UAE during service period",
+        "client_location_at_time_of_service": "Temporarily present in UAE",
+        "vat_obligation": "STANDARD RATED – 5% (risk scenario)",
+        "legal_basis": "FTA Public Clarification – if the customer is physically present in UAE when the service is performed, the zero-rating condition is not met.",
+        "risk_level": "HIGH",
+        "recommendation": "If a foreign client travels to UAE for any part of your service (e.g., biometric appointment, document attestation), the entire supply may become standard rated. Advise clients to complete UAE-side steps remotely where possible, or split the service agreement."
+      }
+    ],
+    "component_vat_summary_table": [
+      {
+        "component": "Consultancy Fee",
+        "uae_resident_client": "5% VAT",
+        "overseas_client": "0% (zero-rated export)",
+        "uae_vat_article": "Article 29 / Article 31"
+      },
+      {
+        "component": "Visa Application Fee (Govt)",
+        "uae_resident_client": "Out of Scope (disbursement)",
+        "overseas_client": "Out of Scope (disbursement)",
+        "uae_vat_article": "Article 2 – Disbursements"
+      },
+      {
+        "component": "Embassy Appointment Fee (Govt)",
+        "uae_resident_client": "Out of Scope (disbursement)",
+        "overseas_client": "Out of Scope (disbursement)",
+        "uae_vat_article": "Article 2 – Disbursements"
+      },
+      {
+        "component": "Air Ticket (International)",
+        "uae_resident_client": "0% (zero-rated)",
+        "overseas_client": "0% (zero-rated)",
+        "uae_vat_article": "Article 45(3)"
+      }
+    ],
+    "overall_risk_flags": [
+      {
+        "flag": "VAT_REGISTRATION_CHECK",
+        "description": "If annual taxable supplies exceed AED 375,000, mandatory VAT registration required. At AED 15,000 per client, that threshold is reached at ~25 clients per year.",
+        "action": "Monitor turnover monthly. Register with FTA before crossing threshold."
+      },
+      {
+        "flag": "BUNDLED_PRICING_RISK",
+        "description": "Billing AED 15,000 as a single undivided amount without itemizing components makes the entire amount look like a standard-rated consultancy fee. This over-charges VAT (on visa/ticket) or under-declares it.",
+        "action": "Always issue itemized invoices separating: Consultancy Fee, Govt Fees (disbursements), Air Ticket."
+      },
+      {
+        "flag": "FREE_ZONE_MISCONCEPTION",
+        "description": "Some Free Zone businesses incorrectly assume they are VAT-exempt. Your Free Zone Trade License does NOT exempt you from VAT on services.",
+        "action": "Comply with standard UAE VAT rules. Contact FTA or a registered tax agent to confirm your specific Free Zone designation."
+      },
+      {
+        "flag": "RECORD_KEEPING",
+        "description": "UAE VAT Law requires records to be kept for 5 years. All client invoices, agreements, and supporting documents must be retained.",
+        "action": "Maintain digital records of all invoices, contracts, and client domicile proof."
+      }
+    ],
+    "key_recommendation_summary": "For UAE-resident clients: charge 5% VAT on your consultancy fee only (not on govt fees or air tickets). For outside-UAE clients: you may zero-rate the consultancy fee as an export of services, provided the client was outside UAE throughout the service. Always itemize your AED 15,000 invoice to correctly apply different VAT treatments to each component. Consult an FTA-registered Tax Agent to formally confirm your VAT registration obligation.",
+    "disclaimer": "This assessment is for general guidance only based on UAE Federal Decree-Law No. 8 of 2017. It does not constitute formal legal or tax advice. Consult a UAE FTA-registered Tax Agent for binding advice specific to your circumstances."
+  }
+}
