@@ -1,0 +1,14 @@
+[[redirects]]
+  from = "http://myupali.lk/*"
+  to = "https://www.myupali.lk/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.myupali.lk/*"
+  to = "https://www.myupali.lk/:splat"
+  status = 301
+  force = true
+
+[build]
+  publish = "."

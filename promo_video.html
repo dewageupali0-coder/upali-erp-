@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Upali Immigration Services - Promo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 100%; height: 100vh;
+    background: #0a1628;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .scene {
+    position: absolute;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    text-align: center;
+    padding: 20px;
+  }
+  .scene.active { opacity: 1; }
+
+  /* SCENE 1 - Intro */
+  .scene1 { background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%); }
+  .logo-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c8a84b, #f0d080);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 25px;
+    box-shadow: 0 0 60px rgba(200,168,75,0.5);
+    animation: pulse 2s infinite;
+    font-size: 50px;
+  }
+  .scene1 h1 {
+    font-size: clamp(24px, 5vw, 52px);
+    font-weight: 800; color: #fff;
+    text-shadow: 0 4px 20px rgba(0,100,255,0.3);
+  }
+  .scene1 p {
+    font-size: clamp(14px, 2.5vw, 22px);
+    color: #00d4ff; margin-top: 12px;
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .divider {
+    width: 150px; height: 3px;
+    background: linear-gradient(90deg, transparent, #c8a84b, transparent);
+    margin: 20px auto;
+  }
+
+  /* SCENE 2 - Services */
+  .scene2 { background: linear-gradient(135deg, #0d1f3c 0%, #1a3a5c 100%); }
+  .scene2 h2 { font-size: clamp(20px, 4vw, 40px); color: #c8a84b; margin-bottom: 20px; font-weight: 700; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 15px; max-width: 700px; width: 100%;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(200,168,75,0.3);
+    border-radius: 12px; padding: 20px 10px;
+    color: #fff;
+  }
+  .service-card .icon { font-size: 32px; margin-bottom: 8px; }
+  .service-card p { font-size: clamp(11px, 1.8vw, 14px); color: #a0b4d0; }
+
+  /* SCENE 3 - Countries */
+  .scene3 { background: linear-gradient(135deg, #0a1628 0%, #0d2a4a 100%); }
+  .scene3 h2 { font-size: clamp(20px, 4vw, 40px); color: #fff; margin-bottom: 8px; font-weight: 700; }
+  .scene3 .sub { color: #00d4ff; font-size: clamp(13px, 2vw, 18px); margin-bottom: 25px; }
+  .countries {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; max-width: 700px;
+  }
+  .country {
+    background: rgba(200,168,75,0.15);
+    border: 1px solid #c8a84b;
+    border-radius: 25px; padding: 10px 20px;
+    color: #fff; font-size: clamp(12px, 2vw, 16px);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* SCENE 4 - Contact */
+  .scene4 { background: linear-gradient(135deg, #1a2d50 0%, #0a1628 100%); }
+  .scene4 h2 { font-size: clamp(20px, 4vw, 42px); color: #c8a84b; margin-bottom: 25px; font-weight: 800; }
+  .contact-info { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+  .contact-item {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 15px 25px;
+    color: #fff; font-size: clamp(13px, 2.5vw, 18px);
+    min-width: 280px;
+  }
+  .contact-item .icon { font-size: 24px; }
+  .website-text {
+    margin-top: 20px; font-size: clamp(14px, 2.5vw, 20px);
+    color: #00d4ff; font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  /* SCENE 5 - Closing */
+  .scene5 { background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%); }
+  .scene5 h2 { font-size: clamp(18px, 3.5vw, 38px); color: #fff; font-weight: 800; margin-bottom: 15px; }
+  .scene5 .tagline { font-size: clamp(14px, 2.5vw, 22px); color: #c8a84b; margin-bottom: 25px; }
+  .cta-btn {
+    background: linear-gradient(135deg, #c8a84b, #f0d080);
+    color: #0a1628; font-weight: 800;
+    font-size: clamp(14px, 2vw, 18px);
+    padding: 15px 40px; border-radius: 30px;
+    border: none; cursor: pointer;
+    box-shadow: 0 8px 30px rgba(200,168,75,0.4);
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed; bottom: 0; left: 0;
+    height: 4px; background: #c8a84b;
+    transition: width 0.1s linear;
+    z-index: 100;
+  }
+
+  /* Scene dots */
+  .dots {
+    position: fixed; bottom: 15px;
+    left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 100;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer; transition: background 0.3s;
+  }
+  .dot.active { background: #c8a84b; }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(200,168,75,0.4); }
+    50% { box-shadow: 0 0 60px rgba(200,168,75,0.8); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Scene 1: Intro -->
+<div class="scene scene1 active" id="scene1">
+  <div class="logo-circle">🌍</div>
+  <h1>Upali Immigration<br>Services</h1>
+  <div class="divider"></div>
+  <p>Your Gateway to Europe & Beyond</p>
+</div>
+
+<!-- Scene 2: Services -->
+<div class="scene scene2" id="scene2">
+  <h2>✨ Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="icon">✈️</div>
+      <p>Visa Processing</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">💼</div>
+      <p>Job Placement</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🏠</div>
+      <p>Accommodation</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">📋</div>
+      <p>Documentation</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🛡️</div>
+      <p>Insurance Support</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🎓</div>
+      <p>Pre-Departure Guidance</p>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 3: Countries -->
+<div class="scene scene3" id="scene3">
+  <h2>🌍 We Send You To</h2>
+  <p class="sub">Top destinations for Sri Lankan workers</p>
+  <div class="countries">
+    <div class="country">🇩🇪 Germany</div>
+    <div class="country">🇳🇱 Netherlands</div>
+    <div class="country">🇮🇪 Ireland</div>
+    <div class="country">🇬🇧 United Kingdom</div>
+    <div class="country">🇨🇿 Czech Republic</div>
+    <div class="country">🇺🇸 USA</div>
+  </div>
+</div>
+
+<!-- Scene 4: Contact -->
+<div class="scene scene4" id="scene4">
+  <h2>📞 Contact Us</h2>
+  <div class="contact-info">
+    <div class="contact-item">
+      <span class="icon">📱</span>
+      <span>+94 76 163 8311 (Sri Lanka)</span>
+    </div>
+    <div class="contact-item">
+      <span class="icon">📱</span>
+      <span>+971 54 204 0298 (UAE)</span>
+    </div>
+    <div class="contact-item">
+      <span class="icon">💬</span>
+      <span>WhatsApp Available</span>
+    </div>
+  </div>
+  <p class="website-text">🌐 www.myupali.lk</p>
+</div>
+
+<!-- Scene 5: Closing -->
+<div class="scene scene5" id="scene5">
+  <h2>Start Your Journey<br>to a Better Life</h2>
+  <p class="tagline">Trusted by hundreds of Sri Lankan families</p>
+  <button class="cta-btn" onclick="window.parent.location.href='#contact'">
+    Contact Us Today →
+  </button>
+  <div class="divider" style="margin-top:25px;"></div>
+  <p style="color:#a0b4d0; font-size:14px; margin-top:15px;">Upali Immigration Services | Puttalam, Sri Lanka</p>
+</div>
+
+<!-- Progress & Dots -->
+<div class="progress-bar" id="progressBar"></div>
+<div class="dots">
+  <div class="dot active" onclick="goToScene(0)"></div>
+  <div class="dot" onclick="goToScene(1)"></div>
+  <div class="dot" onclick="goToScene(2)"></div>
+  <div class="dot" onclick="goToScene(3)"></div>
+  <div class="dot" onclick="goToScene(4)"></div>
+</div>
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const dots = document.querySelectorAll('.dot');
+  const progressBar = document.getElementById('progressBar');
+  let current = 0;
+  let timer;
+  let progress = 0;
+  const duration = 5000;
+
+  function goToScene(index) {
+    scenes[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = index;
+    scenes[current].classList.add('active');
+    dots[current].classList.add('active');
+    progress = 0;
+    clearInterval(timer);
+    startTimer();
+  }
+
+  function startTimer() {
+    const interval = 50;
+    timer = setInterval(() => {
+      progress += (interval / duration) * 100;
+      progressBar.style.width = progress + '%';
+      if (progress >= 100) {
+        clearInterval(timer);
+        const next = (current + 1) % scenes.length;
+        goToScene(next);
+      }
+    }, interval);
+  }
+
+  startTimer();
+</script>
+</body>
+</html>
