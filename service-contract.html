@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Service Agreement — Upali Immigration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --green:#1a5c2b; --green-dark:#0f3a1a; --gold:#f0a500;
+      --off-white:#f8f9f4; --text:#2c2c2c; --text-light:#666;
+      --border:#cdd6c9; --radius:6px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Raleway',sans-serif;color:var(--text);background:#eef1ea;padding:20px 16px 48px}
+
+    .toolbar{max-width:860px;margin:0 auto 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .toolbar h2{font-family:'Playfair Display',serif;color:var(--green);font-size:1rem;margin-right:auto}
+    .btn{padding:8px 18px;border:none;border-radius:var(--radius);font-family:'Raleway',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;letter-spacing:.04em;transition:opacity .2s}
+    .btn:hover{opacity:.85}
+    .btn-green{background:var(--green);color:#fff}
+    .btn-gold{background:var(--gold);color:#fff}
+    .btn-outline{background:transparent;border:1.5px solid var(--green);color:var(--green)}
+
+    .doc{max-width:860px;margin:0 auto;background:#fff;border-radius:10px;box-shadow:0 4px 32px rgba(0,0,0,.12);overflow:hidden}
+
+    /* Header */
+    .doc-header{background:var(--green);padding:28px 36px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .doc-header img{height:62px;filter:brightness(0) invert(1)}
+    .hdr-right{text-align:right}
+    .hdr-right h1{font-family:'Playfair Display',serif;color:#fff;font-size:1.4rem;letter-spacing:.04em}
+    .hdr-right .sub{color:rgba(255,255,255,.8);font-size:.75rem;margin-top:4px}
+    .hdr-right .contract-no{margin-top:10px;font-size:.78rem;color:rgba(255,255,255,.9)}
+    .hdr-right .editable-inv{border:none;border-bottom:1px dashed rgba(255,255,255,.5);background:transparent;color:#fff;font-family:'Raleway',sans-serif;font-size:.78rem;text-align:right;outline:none;width:140px}
+    .gold-bar{height:4px;background:var(--gold)}
+
+    /* Body */
+    .doc-body{padding:28px 36px}
+
+    /* Parties */
+    .parties-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+    .party-card{padding:16px;border-radius:var(--radius);font-size:.83rem;line-height:1.8}
+    .party-card.consultant{background:var(--off-white);border-left:3px solid var(--green)}
+    .party-card.client{background:#fff8e8;border-left:3px solid var(--gold)}
+    .party-card h4{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);margin-bottom:8px}
+    .party-card strong{font-weight:700;color:var(--green);font-size:.88rem}
+    .editable{border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-family:'Raleway',sans-serif;font-size:.83rem;color:var(--text);padding:1px 3px;outline:none;width:100%}
+    .editable:focus{border-color:var(--green)}
+    .editable-sm{border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-family:'Raleway',sans-serif;font-size:.83rem;color:var(--text);padding:1px 3px;outline:none;min-width:80px}
+    .editable-sm:focus{border-color:var(--green)}
+
+    /* Recital */
+    .recital{background:var(--off-white);border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;font-size:.83rem;line-height:1.8;color:var(--text)}
+    .recital p{margin-bottom:6px}
+
+    /* Clauses */
+    .clause{margin-bottom:24px}
+    .clause h3{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--green);border-bottom:2px solid var(--gold);padding-bottom:5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .clause h3 .cl-num{background:var(--green);color:#fff;font-family:'Raleway',sans-serif;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:12px}
+    .clause p,.clause li{font-size:.83rem;line-height:1.85;color:var(--text);margin-bottom:6px}
+    .clause ul,.clause ol{padding-left:20px;margin-bottom:8px}
+    .clause li{margin-bottom:4px}
+
+    /* Fee table */
+    .fee-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:12px 0}
+    .fee-table thead tr{background:var(--green);color:#fff}
+    .fee-table thead th{padding:8px 12px;text-align:left;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+    .fee-table thead th.right{text-align:right}
+    .fee-table tbody td{padding:8px 12px;border-bottom:1px solid var(--border)}
+    .fee-table tbody tr:nth-child(even){background:var(--off-white)}
+    .fee-table tbody td.right{text-align:right;font-variant-numeric:tabular-nums}
+    .fee-table tfoot td{padding:8px 12px;font-weight:700;background:var(--green);color:#fff}
+    .fee-table tfoot td.right{text-align:right}
+
+    /* Milestone table */
+    .milestone-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:12px 0}
+    .milestone-table th{background:var(--off-white);padding:8px 12px;text-align:left;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--green);border-bottom:2px solid var(--border)}
+    .milestone-table td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:.83rem}
+    .milestone-table td.right{text-align:right;font-weight:600}
+    .milestone-table tr:hover{background:var(--off-white)}
+
+    /* highlight box */
+    .highlight{background:#e8f4eb;border-left:3px solid var(--green);padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;font-size:.82rem;line-height:1.7;margin:10px 0}
+    .warning{background:#fff8e8;border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;font-size:.82rem;line-height:1.7;margin:10px 0}
+
+    /* Signature */
+    .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:24px}
+    .sig-box{text-align:center}
+    .sig-line-top{border-top:1.5px solid var(--green);margin:56px 0 6px}
+    .sig-box p{font-size:.75rem;color:var(--text-light)}
+    .sig-box strong{font-size:.82rem;color:var(--green);display:block;margin-top:2px}
+    .sig-fields{text-align:left;margin-top:10px;display:flex;flex-direction:column;gap:8px}
+    .sig-fields label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);display:block;margin-bottom:2px}
+
+    /* Footer */
+    .doc-footer{background:var(--green-dark,#0f3a1a);padding:12px 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .doc-footer p{color:rgba(255,255,255,.7);font-size:.7rem}
+    .doc-footer .trn{background:var(--gold);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px}
+
+    @media print{
+      body{background:#fff;padding:0}
+      .toolbar{display:none}
+      .doc{box-shadow:none;border-radius:0;max-width:100%}
+      .editable,.editable-sm,.editable-inv{border-color:#ccc!important}
+      @page{margin:.6cm;size:A4}
+    }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>Upali ERP — Client Service Agreement</h2>
+  <a href="portal.html" class="btn btn-outline">&#8592; Portal</a>
+  <button class="btn btn-gold" onclick="window.print()">&#128438; Print / Save PDF</button>
+</div>
+
+<div class="doc">
+
+  <div class="doc-header">
+    <img src="images/logo.png" alt="Upali Logo" />
+    <div class="hdr-right">
+      <h1>Client Service Agreement</h1>
+      <div class="sub">Immigration Consultancy Services — UAE</div>
+      <div class="contract-no">
+        Agreement No.: <input class="editable-inv" value="UIC-CSA-2026-001" /><br>
+        Date: <input class="editable-inv" type="date" value="2026-05-26" /><br>
+        Effective: <input class="editable-inv" type="date" value="2026-05-26" />
+      </div>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+
+  <div class="doc-body">
+
+    <!-- Parties -->
+    <div class="parties-row">
+      <div class="party-card consultant">
+        <h4>The Consultant ("Service Provider")</h4>
+        <strong>Upali Immigration Service Consultancy</strong><br>
+        Trade Licence: <input class="editable" value="CN-XXXXXXXX" style="width:120px" /><br>
+        TRN: <input class="editable" value="100XXXXXXXXXXX" style="width:140px" /><br>
+        Dubai, United Arab Emirates<br>
+        Tel: <input class="editable" value="+971 XX XXX XXXX" style="width:130px" /><br>
+        Email: <input class="editable" value="info@upali.ae" style="width:130px" />
+      </div>
+      <div class="party-card client">
+        <h4>The Client ("Applicant")</h4>
+        <strong><input class="editable" placeholder="Client Full Name (as per passport)" /></strong><br>
+        Nationality: <input class="editable" placeholder="Nationality" style="width:120px" /><br>
+        Passport No.: <input class="editable" placeholder="Passport No." style="width:120px" /><br>
+        Address: <input class="editable" placeholder="Residential Address" /><br>
+        Tel: <input class="editable" placeholder="+971 XX XXX XXXX" style="width:130px" /><br>
+        Email: <input class="editable" placeholder="client@email.com" style="width:140px" />
+      </div>
+    </div>
+
+    <!-- Recital -->
+    <div class="recital">
+      <p><strong>WHEREAS</strong> the Consultant is duly licensed to provide immigration consultancy services in the United Arab Emirates; and</p>
+      <p><strong>WHEREAS</strong> the Client wishes to engage the Consultant to provide end-to-end immigration consultancy services for the purpose of applying for a <strong><input class="editable-sm" placeholder="Visa Type / Country" style="width:200px" /></strong> visa;</p>
+      <p><strong>NOW, THEREFORE</strong>, in consideration of the mutual covenants set out herein, the parties agree as follows:</p>
+    </div>
+
+    <!-- Clause 1 -->
+    <div class="clause">
+      <h3><span class="cl-num">1</span> Scope of Services</h3>
+      <p>The Consultant agrees to provide the following end-to-end immigration consultancy services ("Services") to the Client:</p>
+      <ul>
+        <li><strong>Onboarding &amp; Assessment:</strong> Initial consultation, eligibility assessment, and personalised immigration pathway advice.</li>
+        <li><strong>Documentation:</strong> Preparation, review, and compilation of all required documents including CV, cover letters, educational assessments, and supporting evidence.</li>
+        <li><strong>Application Submission:</strong> Preparation and submission of the visa/work permit application to the relevant immigration authority on behalf of the Client.</li>
+        <li><strong>Liaison &amp; Follow-up:</strong> Communication with immigration authorities, embassies, and third-party agencies regarding the application status.</li>
+        <li><strong>Biometric &amp; Appointment Coordination:</strong> Scheduling and coordination of biometric appointments and embassy/consulate visits.</li>
+        <li><strong>Pre-Departure Support:</strong> Guidance on travel, settlement, and arrival requirements in the destination country.</li>
+        <li><strong>Air Ticket Arrangement:</strong> Coordination of international air travel (UAE to destination) as a disbursement service.</li>
+      </ul>
+      <div class="highlight">
+        <strong>Destination Country:</strong> <input class="editable-sm" placeholder="e.g. Ireland" />&nbsp;&nbsp;
+        <strong>Visa Category:</strong> <input class="editable-sm" placeholder="e.g. Employment Permit" style="width:180px" />
+      </div>
+    </div>
+
+    <!-- Clause 2 -->
+    <div class="clause">
+      <h3><span class="cl-num">2</span> Service Fees &amp; Payment Schedule</h3>
+      <p>In consideration of the Services, the Client agrees to pay the following fees:</p>
+
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Description</th>
+            <th class="right">Amount (AED)</th>
+            <th>VAT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Consultancy Fee — End-to-End Immigration Service</td>
+            <td class="right">8,000.00</td>
+            <td>0% Zero-Rated</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Government Visa Application Fee (Disbursement)</td>
+            <td class="right">3,000.00</td>
+            <td>Out of Scope</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Biometric / Embassy Appointment Fee (Disbursement)</td>
+            <td class="right">1,000.00</td>
+            <td>Out of Scope</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>International Air Ticket — UAE to Destination (Disbursement)</td>
+            <td class="right">3,000.00</td>
+            <td>0% Zero-Rated</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">TOTAL AGREED FEE</td>
+            <td class="right">AED 15,000.00</td>
+            <td>VAT: AED 0.00</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <p style="margin-top:10px"><strong>Payment Milestones:</strong></p>
+      <table class="milestone-table">
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>Trigger Event</th>
+            <th class="right">Amount (AED)</th>
+            <th>Invoice Ref.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 — Onboarding</td>
+            <td>Signed agreement received</td>
+            <td class="right">5,000.00</td>
+            <td><input class="editable-sm" placeholder="INV-001" /></td>
+          </tr>
+          <tr>
+            <td>2 — Application Submission</td>
+            <td>Application submitted to authority</td>
+            <td class="right">3,000.00</td>
+            <td><input class="editable-sm" placeholder="INV-002" /></td>
+          </tr>
+          <tr>
+            <td>3 — Visa Approval</td>
+            <td>Visa / permit approval received</td>
+            <td class="right">4,000.00</td>
+            <td><input class="editable-sm" placeholder="INV-003" /></td>
+          </tr>
+          <tr>
+            <td>4 — Disbursements</td>
+            <td>Third-party receipts provided</td>
+            <td class="right">3,000.00</td>
+            <td><input class="editable-sm" placeholder="INV-004" /></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        <strong>Payment Method:</strong> Bank transfer to Upali Immigration Service Consultancy — IBAN: <input class="editable-sm" placeholder="AE XX XXXX..." style="width:200px" />.
+        All payments in AED. Receipts issued for each milestone.
+      </div>
+    </div>
+
+    <!-- Clause 3 -->
+    <div class="clause">
+      <h3><span class="cl-num">3</span> Client Obligations</h3>
+      <p>The Client agrees to:</p>
+      <ol>
+        <li>Provide all required documents, information, and disclosures truthfully and in a timely manner.</li>
+        <li>Disclose any previous visa refusals, criminal records, or immigration history honestly and completely.</li>
+        <li>Attend all scheduled appointments (biometric, embassy, medical) promptly.</li>
+        <li>Make all milestone payments on their respective due dates.</li>
+        <li>Notify the Consultant immediately of any changes in personal circumstances (employment, address, marital status) that may affect the application.</li>
+        <li>Not engage any other immigration consultant for the same application without prior written consent.</li>
+      </ol>
+    </div>
+
+    <!-- Clause 4 -->
+    <div class="clause">
+      <h3><span class="cl-num">4</span> Consultant Obligations</h3>
+      <p>The Consultant agrees to:</p>
+      <ol>
+        <li>Provide Services with reasonable skill, care, and diligence in accordance with UAE professional standards.</li>
+        <li>Keep the Client's personal data strictly confidential and use it solely for immigration purposes.</li>
+        <li>Provide regular progress updates throughout the application process.</li>
+        <li>Submit all government fees and disbursements at exact cost, evidenced by third-party receipts.</li>
+        <li>Maintain all required licences and regulatory registrations throughout the engagement.</li>
+      </ol>
+    </div>
+
+    <!-- Clause 5 -->
+    <div class="clause">
+      <h3><span class="cl-num">5</span> No Guarantee of Outcome</h3>
+      <div class="warning">
+        <strong>Important:</strong> The Consultant does not guarantee a successful visa or immigration outcome. Immigration decisions rest solely with the relevant government authorities. The Consultant's obligation is to provide competent professional services — not to guarantee approval.
+      </div>
+      <p style="margin-top:8px">The Client acknowledges that visa refusal does not entitle the Client to a refund of the consultancy fee (Line 1), as the professional services will have been rendered. Government disbursements (Lines 2–4) will be refunded only to the extent recoverable from third parties.</p>
+    </div>
+
+    <!-- Clause 6 -->
+    <div class="clause">
+      <h3><span class="cl-num">6</span> Refund &amp; Cancellation Policy</h3>
+      <ul>
+        <li><strong>Before Application Submission:</strong> 50% of the consultancy fee (AED 4,000) is refundable if the Client cancels after onboarding but before submission.</li>
+        <li><strong>After Application Submission:</strong> The consultancy fee (AED 8,000) is non-refundable.</li>
+        <li><strong>Disbursements:</strong> Refundable only if not yet paid to the relevant government authority or airline.</li>
+        <li><strong>Visa Refusal:</strong> No refund of consultancy fee. Disbursements refunded to the extent recovered from authorities.</li>
+      </ul>
+    </div>
+
+    <!-- Clause 7 -->
+    <div class="clause">
+      <h3><span class="cl-num">7</span> Confidentiality &amp; Data Protection</h3>
+      <p>Both parties agree to keep all information exchanged under this Agreement strictly confidential. The Consultant shall process the Client's personal data in compliance with applicable UAE data protection laws and shall not disclose it to any third party except as required for the provision of Services (e.g., submission to immigration authorities, embassies).</p>
+    </div>
+
+    <!-- Clause 8 -->
+    <div class="clause">
+      <h3><span class="cl-num">8</span> Termination</h3>
+      <ul>
+        <li><strong>By Client:</strong> The Client may terminate this Agreement by providing <strong>14 days' written notice</strong>. Refund provisions in Clause 6 apply.</li>
+        <li><strong>By Consultant:</strong> The Consultant may terminate immediately if the Client provides false information, fails to pay, or engages in conduct that jeopardises the application or the Consultant's professional standing.</li>
+        <li>Upon termination, all original documents provided by the Client shall be returned within 7 business days.</li>
+      </ul>
+    </div>
+
+    <!-- Clause 9 -->
+    <div class="clause">
+      <h3><span class="cl-num">9</span> Governing Law &amp; Dispute Resolution</h3>
+      <p>This Agreement is governed by and construed in accordance with the laws of the <strong>United Arab Emirates</strong>. Any dispute arising out of or in connection with this Agreement shall first be referred to mediation. If unresolved within 30 days, disputes shall be submitted to the courts of <strong>Dubai, UAE</strong>.</p>
+    </div>
+
+    <!-- Clause 10 -->
+    <div class="clause">
+      <h3><span class="cl-num">10</span> Entire Agreement</h3>
+      <p>This Agreement constitutes the entire agreement between the parties and supersedes all prior representations, discussions, and arrangements. Amendments must be in writing and signed by both parties.</p>
+    </div>
+
+    <!-- Signatures -->
+    <div style="border-top:2px solid var(--border);padding-top:24px;margin-top:8px">
+      <p style="font-size:.82rem;margin-bottom:4px">By signing below, both parties confirm they have read, understood, and agreed to all terms of this Agreement.</p>
+      <div class="sig-grid">
+        <div class="sig-box">
+          <div class="sig-line-top"></div>
+          <p>Authorised Signatory — Consultant</p>
+          <strong>Upali Immigration Service Consultancy</strong>
+          <div class="sig-fields">
+            <div>
+              <label>Name &amp; Designation</label>
+              <input class="editable" placeholder="Name / Director" />
+            </div>
+            <div>
+              <label>Date</label>
+              <input class="editable" type="date" />
+            </div>
+            <div>
+              <label>Company Stamp</label>
+              <div style="height:40px;border:1px dashed var(--border);border-radius:var(--radius);margin-top:4px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="sig-box">
+          <div class="sig-line-top"></div>
+          <p>Client Signature</p>
+          <strong><input class="editable" placeholder="Client Full Name" style="text-align:center" /></strong>
+          <div class="sig-fields">
+            <div>
+              <label>Passport No.</label>
+              <input class="editable" placeholder="Passport number" />
+            </div>
+            <div>
+              <label>Date</label>
+              <input class="editable" type="date" />
+            </div>
+            <div>
+              <label>Place</label>
+              <input class="editable" placeholder="City, Country" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <div class="doc-footer">
+    <p>Upali Immigration Service Consultancy &nbsp;|&nbsp; Dubai, UAE &nbsp;|&nbsp; info@upali.ae</p>
+    <div class="trn">TRN: <span>100XXXXXXXXXXX</span></div>
+    <p>This is a legally binding agreement. Retain a signed copy for your records.</p>
+  </div>
+
+</div><!-- /doc -->
+</body>
+</html>

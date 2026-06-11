@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Document Portal — Upali Immigration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--green:#1a5c2b;--green-dark:#0f3a1a;--gold:#f0a500;--off-white:#f8f9f4;--text:#2c2c2c;--text-light:#666;--border:#cdd6c9;--radius:10px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Raleway',sans-serif;color:var(--text);background:#eef1ea;min-height:100vh}
+
+    /* Header */
+    .header{background:var(--green);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .header img{height:58px;filter:brightness(0) invert(1)}
+    .header-right{text-align:right}
+    .header-right h1{font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem}
+    .header-right p{color:rgba(255,255,255,.8);font-size:.78rem;margin-top:4px}
+    .gold-bar{height:4px;background:var(--gold)}
+
+    /* Container */
+    .container{max-width:1100px;margin:0 auto;padding:36px 24px}
+
+    /* Welcome strip */
+    .welcome-strip{background:#fff;border-radius:var(--radius);padding:20px 28px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+    .welcome-strip h2{font-family:'Playfair Display',serif;color:var(--green);font-size:1.15rem}
+    .welcome-strip p{font-size:.83rem;color:var(--text-light);margin-top:4px}
+    .badge{display:inline-block;background:#e8f4eb;color:var(--green);font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.06em}
+
+    /* Grid */
+    .doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-bottom:36px}
+
+    /* Card */
+    .doc-card{background:#fff;border-radius:var(--radius);box-shadow:0 2px 16px rgba(0,0,0,.07);overflow:hidden;transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+    .doc-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.12)}
+    .card-header{padding:22px 22px 16px;display:flex;align-items:flex-start;gap:14px}
+    .card-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .icon-green{background:#e8f4eb}
+    .icon-gold{background:#fff3cd}
+    .icon-blue{background:#e8f0fe}
+    .icon-purple{background:#f3e8fe}
+    .card-header-text h3{font-size:.95rem;font-weight:700;color:var(--green);margin-bottom:3px}
+    .card-header-text p{font-size:.75rem;color:var(--text-light);line-height:1.5}
+    .card-body{padding:0 22px 16px;flex:1}
+    .card-body ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+    .card-body li{font-size:.78rem;color:var(--text-light);display:flex;align-items:center;gap:6px}
+    .card-body li::before{content:'›';color:var(--green);font-weight:700}
+    .card-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .card-footer .step-badge{font-size:.68rem;font-weight:600;color:var(--text-light);letter-spacing:.06em;text-transform:uppercase}
+    .open-btn{background:var(--green);color:#fff;border:none;border-radius:6px;padding:6px 16px;font-family:'Raleway',sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;text-decoration:none;transition:background .2s}
+    .open-btn:hover{background:var(--green-dark)}
+    .open-btn.gold{background:var(--gold)}
+    .open-btn.gold:hover{background:#d4940a}
+
+    /* Process flow */
+    .process{background:#fff;border-radius:var(--radius);padding:24px 28px;margin-bottom:32px;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+    .process h3{font-family:'Playfair Display',serif;color:var(--green);font-size:1rem;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px}
+    .flow{display:flex;align-items:flex-start;gap:0;flex-wrap:nowrap;overflow-x:auto}
+    .flow-step{flex:1;min-width:120px;text-align:center;position:relative}
+    .flow-step:not(:last-child)::after{content:'›';position:absolute;right:-10px;top:18px;font-size:1.4rem;color:var(--gold);font-weight:700}
+    .step-circle{width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.95rem;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+    .flow-step.active .step-circle{background:var(--gold)}
+    .step-label{font-size:.72rem;font-weight:600;color:var(--text);line-height:1.4}
+    .step-doc{font-size:.65rem;color:var(--text-light);margin-top:3px}
+
+    /* Quick info */
+    .info-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+    .info-card{background:#fff;border-radius:var(--radius);padding:16px 20px;box-shadow:0 2px 16px rgba(0,0,0,.07);border-left:3px solid var(--green)}
+    .info-card.gold{border-color:var(--gold)}
+    .info-card h4{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:6px}
+    .info-card .value{font-size:1.3rem;font-weight:700;color:var(--green);font-family:'Playfair Display',serif}
+    .info-card.gold .value{color:var(--gold)}
+    .info-card p{font-size:.75rem;color:var(--text-light);margin-top:2px}
+
+    /* Footer */
+    .portal-footer{background:var(--green-dark,#0f3a1a);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .portal-footer p{color:rgba(255,255,255,.7);font-size:.72rem}
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <img src="images/logo.png" alt="Upali Logo" />
+  <div class="header-right">
+    <h1>Client Document Portal</h1>
+    <p>Upali Immigration Service Consultancy — Dubai, UAE</p>
+  </div>
+</div>
+<div class="gold-bar"></div>
+
+<div class="container">
+
+  <!-- Welcome Strip -->
+  <div class="welcome-strip">
+    <div>
+      <h2>Immigration Document Suite</h2>
+      <p>Complete client onboarding package — click any document to open, fill, and print</p>
+    </div>
+    <span class="badge">&#9992; EU Work Visa — Ireland | AED 15,000</span>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="info-row">
+    <div class="info-card">
+      <h4>Total Documents</h4>
+      <div class="value">4</div>
+      <p>Form · Contract · Invoice · Letter</p>
+    </div>
+    <div class="info-card gold">
+      <h4>Service Fee</h4>
+      <div class="value">AED 15,000</div>
+      <p>Zero VAT — all disbursements included</p>
+    </div>
+    <div class="info-card">
+      <h4>Process Steps</h4>
+      <div class="value">5</div>
+      <p>Onboard → Submit → Approve → Travel → Settle</p>
+    </div>
+    <div class="info-card gold">
+      <h4>Destination</h4>
+      <div class="value" style="font-size:1rem;padding-top:4px">Ireland 🇮🇪</div>
+      <p>EU Work Visa — Employment Permit</p>
+    </div>
+  </div>
+
+  <!-- Onboarding Process Flow -->
+  <div class="process">
+    <h3>Client Onboarding Process</h3>
+    <div class="flow">
+      <div class="flow-step active">
+        <div class="step-circle">1</div>
+        <div class="step-label">Background Check</div>
+        <div class="step-doc">Background Form</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">2</div>
+        <div class="step-label">Sign Agreement</div>
+        <div class="step-doc">Service Contract</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">3</div>
+        <div class="step-label">Issue Invoice</div>
+        <div class="step-doc">Tax Invoice</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">4</div>
+        <div class="step-label">Welcome Client</div>
+        <div class="step-doc">Welcome Letter</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-circle">5</div>
+        <div class="step-label">Submit Application</div>
+        <div class="step-doc">Processing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document Cards -->
+  <div class="doc-grid">
+
+    <!-- Background Form -->
+    <div class="doc-card">
+      <div class="card-header">
+        <div class="card-icon icon-green">📋</div>
+        <div class="card-header-text">
+          <h3>Background Check Form</h3>
+          <p>10-section client intake form — collect all personal, immigration, and financial data</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>Personal &amp; passport information</li>
+          <li>Visa &amp; immigration history</li>
+          <li>Criminal record declaration</li>
+          <li>Employment &amp; education</li>
+          <li>Financial information</li>
+          <li>Signed client declaration</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <span class="step-badge">Step 1 — Onboarding</span>
+        <a href="form-background.html" class="open-btn">Open Form</a>
+      </div>
+    </div>
+
+    <!-- Service Contract -->
+    <div class="doc-card">
+      <div class="card-header">
+        <div class="card-icon icon-blue">📄</div>
+        <div class="card-header-text">
+          <h3>Client Service Agreement</h3>
+          <p>Legally binding contract covering scope, fees, obligations, refunds, and governing law</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>10 contract clauses</li>
+          <li>Detailed fee &amp; milestone schedule</li>
+          <li>No-guarantee disclaimer</li>
+          <li>Refund &amp; cancellation policy</li>
+          <li>Confidentiality clause</li>
+          <li>UAE governing law — Dubai courts</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <span class="step-badge">Step 2 — Agreement</span>
+        <a href="service-contract.html" class="open-btn">Open Contract</a>
+      </div>
+    </div>
+
+    <!-- Tax Invoice -->
+    <div class="doc-card">
+      <div class="card-header">
+        <div class="card-icon icon-gold">🧾</div>
+        <div class="card-header-text">
+          <h3>Tax Invoice</h3>
+          <p>UAE VAT-compliant invoice with auto-calculated totals and print-to-PDF support</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>All UAE FTA mandatory fields</li>
+          <li>Zero-rated + out-of-scope lines</li>
+          <li>Auto amount-in-words</li>
+          <li>Add / remove line items</li>
+          <li>Payment details &amp; bank info</li>
+          <li>Signature block</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <span class="step-badge">Step 3 — Invoice</span>
+        <a href="invoice.html" class="open-btn gold">Open Invoice</a>
+      </div>
+    </div>
+
+    <!-- Welcome Letter -->
+    <div class="doc-card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">✉️</div>
+        <div class="card-header-text">
+          <h3>Welcome Letter</h3>
+          <p>Branded professional welcome letter on company letterhead with next steps</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>Company letterhead + logo</li>
+          <li>Services included summary</li>
+          <li>Client next steps checklist</li>
+          <li>Contact information</li>
+          <li>Authorised signatory block</li>
+          <li>Company stamp area</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <span class="step-badge">Step 4 — Welcome</span>
+        <a href="welcome-letter.html" class="open-btn">Open Letter</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Instructions -->
+  <div style="background:#fff;border-radius:var(--radius);padding:20px 28px;box-shadow:0 2px 16px rgba(0,0,0,.07)">
+    <h3 style="font-family:'Playfair Display',serif;color:var(--green);font-size:.95rem;margin-bottom:12px">How to Use</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:.82rem;line-height:1.7;color:var(--text-light)">
+      <div><strong style="color:var(--green)">1. Open</strong> each document by clicking its button above.</div>
+      <div><strong style="color:var(--green)">2. Fill</strong> in the editable fields (click any dashed underline).</div>
+      <div><strong style="color:var(--green)">3. Print</strong> click "Print / Save PDF" to generate a clean PDF.</div>
+      <div><strong style="color:var(--green)">4. Send</strong> signed copies to your client via email or in person.</div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="portal-footer">
+  <p>Upali Immigration Service Consultancy &nbsp;|&nbsp; Dubai, UAE &nbsp;|&nbsp; info@upali.ae</p>
+  <p>TRN: 100XXXXXXXXXXX &nbsp;|&nbsp; Licensed Immigration Consultant &nbsp;|&nbsp; &copy; 2026</p>
+</div>
+
+</body>
+</html>
