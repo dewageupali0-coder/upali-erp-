@@ -189,6 +189,9 @@ input, select, textarea { font-family: inherit; }
     object-fit: contain;
     transition: transform 0.5s ease;
     flex-shrink: 0;
+    background: transparent;
+    mix-blend-mode: multiply;
+    border-radius: 4px;
 }
 
 .logo:hover .logo-img {
