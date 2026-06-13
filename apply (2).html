@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upali Immigration — Check Your Eligibility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Noto+Sans+Sinhala:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#006428; --green-dark:#004d1f; --gold:#F0B400; --gold-soft:#FFF6DC;
+  --ink:#1c2420; --muted:#5c6a62; --paper:#FAFBF7; --card:#FFFFFF; --line:#E3E8E1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans Sinhala',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px 60px}
+header{background:var(--green);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .mark{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--green);font-family:'Fraunces',serif;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:17px;border:2px solid var(--gold)}
+.brand .logo-img{height:40px;width:auto;background:#fff;border-radius:8px;padding:4px;border:1.5px solid var(--gold);object-fit:contain}
+.brand b{font-size:14px;letter-spacing:.02em}
+.brand small{display:block;font-size:10px;opacity:.85;font-weight:400}
+.lang{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+.lang:active{background:rgba(255,255,255,.15)}
+.hero{padding:34px 0 22px;text-align:left}
+.hero .eyebrow{display:inline-block;background:var(--gold-soft);color:#8a6a00;border:1px solid #F0D98A;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:14px}
+h1{font-family:'Fraunces','Noto Sans Sinhala',serif;font-size:30px;line-height:1.2;color:var(--green-dark);margin-bottom:10px}
+.hero p{color:var(--muted);font-size:15px}
+.trust{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap}
+.trust span{font-size:12px;color:var(--muted)}
+.trust b{color:var(--green)}
+.btn{display:block;width:100%;background:var(--green);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:18px;transition:background .15s}
+.btn:active{background:var(--green-dark)}
+.btn.gold{background:var(--gold);color:#3a2d00}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px;box-shadow:0 1px 3px rgba(0,40,15,.05)}
+.progress{height:5px;background:var(--line);border-radius:3px;margin-bottom:20px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--gold);border-radius:3px;transition:width .3s}
+.qnum{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.qtext{font-family:'Fraunces','Noto Sans Sinhala',serif;font-size:20px;color:var(--ink);margin-bottom:16px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:13px 15px;font-size:15px;margin-bottom:10px;cursor:pointer;font-family:inherit;color:var(--ink);transition:border-color .12s,background .12s}
+.opt:active,.opt.sel{border-color:var(--green);background:#F0F7F1}
+.back{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px;font-family:inherit;text-decoration:underline}
+.result-badge{display:inline-block;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:12px}
+.rb-strong{background:#E2F3E6;color:var(--green-dark)}
+.rb-possible{background:var(--gold-soft);color:#8a6a00}
+.stat{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:11px 0;font-size:14px}
+.stat:last-child{border:none}
+.stat b{color:var(--green-dark)}
+label{display:block;font-size:13px;font-weight:600;margin:14px 0 5px;color:var(--ink)}
+input,select{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:12px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus,.opt:focus,.btn:focus,.lang:focus{outline:2px solid var(--gold);outline-offset:1px}
+.note{font-size:12px;color:var(--muted);margin-top:12px}
+.success{text-align:center;padding:30px 10px}
+.success .tick{width:60px;height:60px;border-radius:50%;background:var(--green);color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-size:11.5px;color:var(--muted);line-height:1.7}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <img class="logo-img" src="logo.png" alt="Upali Immigration logo">
+    <div><b>Upali Immigration</b><small>Consultancy LLC · UAE Licence 2646027.01</small></div>
+  </div>
+  <button class="lang" id="langBtn" onclick="toggleLang()">සිංහල</button>
+</header>
+
+<div class="wrap">
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="hero">
+      <span class="eyebrow" data-i="eyebrow"></span>
+      <h1 data-i="title"></h1>
+      <p data-i="subtitle"></p>
+      <div class="trust">
+        <span data-i="t1"></span><span data-i="t2"></span><span data-i="t3"></span>
+      </div>
+      <button class="btn" onclick="startQuiz()" data-i="start"></button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="card">
+      <div class="progress"><i id="bar"></i></div>
+      <div class="qnum" id="qnum"></div>
+      <div class="qtext" id="qtext"></div>
+      <div id="opts"></div>
+      <button class="back" onclick="goBack()" data-i="back"></button>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="hidden">
+    <div class="card">
+      <span class="result-badge" id="badge"></span>
+      <div class="qtext" id="resTitle"></div>
+      <div class="stat"><span data-i="rDest"></span><b id="rDest"></b></div>
+      <div class="stat"><span data-i="rRole"></span><b id="rRole"></b></div>
+      <div class="stat"><span data-i="rTime"></span><b id="rTime"></b></div>
+      <div class="stat hidden" id="prRow"><span data-i="rPR"></span><b id="rPR"></b></div>
+      <div class="stat"><span data-i="rDocs"></span><b id="rDocs"></b></div>
+      <p class="note" data-i="disclaimer"></p>
+      <button class="btn gold" onclick="show('lead')" data-i="cta"></button>
+    </div>
+  </section>
+
+  <!-- LEAD FORM -->
+  <section id="lead" class="hidden">
+    <div class="card">
+      <div class="qtext" data-i="formTitle"></div>
+      <p class="note" data-i="formSub"></p>
+      <form id="leadForm" onsubmit="return submitLead(event)">
+        <label data-i="fName"></label><input name="Last Name" required maxlength="80">
+        <label data-i="fPhone"></label><input name="Phone" type="tel" required maxlength="30" placeholder="+94 7X XXX XXXX">
+        <label data-i="fEmail"></label><input name="Email" type="email" maxlength="100">
+        <label data-i="fCity"></label><input name="City" maxlength="80">
+        <button class="btn" type="submit" data-i="fSubmit"></button>
+        <p class="note" data-i="privacy"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- THANK YOU -->
+  <section id="done" class="hidden">
+    <div class="card success">
+      <div class="tick">✓</div>
+      <div class="qtext" data-i="doneTitle"></div>
+      <p class="note" data-i="doneSub"></p>
+    </div>
+  </section>
+
+  <footer>
+    <b>Upali Immigration Consultancy LLC</b> · Shams Free Zone, UAE · Trade Licence 2646027.01<br>
+    info@myupali.lk · myupali.lk · SLBFE registration in progress<br>
+    <span data-i="footNote"></span>
+  </footer>
+</div>
+
+<script>
+/* ============ ZOHO CRM CONNECTION ============
+   1. In Zoho CRM: Setup > Developer Space > Web Forms > Leads > Create form
+      with fields: Last Name, Phone, Email, City + hidden fields below.
+   2. Copy the form's ACTION URL and the hidden input values (xnQsjsdp, xmIwtLD)
+      from Zoho's embed code and paste them here: */
+const ZOHO_ACTION = "";            // e.g. https://crm.zoho.com/crm/WebToLeadForm
+const ZOHO_HIDDEN = { xnQsjsdp:"", xmIwtLD:"", actionType:"TGVhZHM=", returnURL:"https://myupali.lk" };
+/* Until filled in, submissions show the thank-you screen and log to console. */
+
+const T = {
+en:{
+ eyebrow:"Free eligibility check · 2 minutes",
+ title:"Your overseas job journey, checked honestly.",
+ subtitle:"Answer a few questions and see which European or New Zealand work pathway fits you — with realistic timelines, no false promises.",
+ t1:"✔ <b>Licensed</b> UAE consultancy", t2:"✔ EU & NZ pathways", t3:"✔ No upfront fraud risk",
+ start:"Check My Eligibility — Free",
+ back:"← Back",
+ q:[
+  {q:"Where do you want to work?",o:["Netherlands","Denmark","Ireland","Poland","Germany","France","Italy","Spain","New Zealand"]},
+  {q:"What type of role are you looking for?",o:["Blue-collar (skilled worker)","Executive / professional"]},
+  {q:"Which job profile fits you best?",bc:["Warehouse worker","Factory worker","Office admin","Healthcare","Construction worker","Hotel — chef / cook","Hotel — pastry chef","Hotel — kitchen assistant","Hotel — housekeeping / front desk"],ex:["Doctor / medical professional","Manager","Sales professional"]},
+  {q:"Your work experience?",o:["Less than 1 year","1–3 years","3–5 years","More than 5 years"]},
+  {q:"Your highest education?",o:["O/L or below","A/L","Diploma / NVQ","Degree or higher"]},
+  {q:"Your English ability?",o:["Basic","Good","Fluent"]},
+  {q:"Do you have a valid passport?",o:["Yes, valid 2+ years","Yes, less than 2 years","Not yet"]}
+ ],
+ nums:["Question 1 of 7","Question 2 of 7","Question 3 of 7","Question 4 of 7","Question 5 of 7","Question 6 of 7","Question 7 of 7"],
+ strong:"Strong match", possible:"Possible match",
+ resTitleStrong:"Good news — you match this pathway.", resTitlePossible:"You may qualify — let's review together.",
+ rDest:"Destination", rRole:"Role", rTime:"Typical processing time", rPR:"Permanent residence pathway", rDocs:"Documents readiness",
+ docsOk:"Ready", docsPrep:"Needs preparation",
+ disclaimer:"Timelines are industry-standard estimates. No agency can guarantee a visa — we show you realistic outcomes based on placement history.",
+ cta:"Request My Free Assessment",
+ formTitle:"Get your free assessment", formSub:"Our consultant will contact you on WhatsApp within 24 hours.",
+ fName:"Full name", fPhone:"Phone / WhatsApp", fEmail:"Email (optional)", fCity:"Your city", fSubmit:"Send My Details",
+ privacy:"Your details go only to Upali Immigration Consultancy and are never shared. We are a licensed consultancy — Trade Licence 2646027.01.",
+ doneTitle:"Thank you! Your details are received.", doneSub:"Our consultant will contact you within 24 hours on WhatsApp. Keep your passport details ready.",
+ footNote:"We never ask for payment before a written service agreement. Beware of fraudulent agents."
+},
+si:{
+ eyebrow:"නොමිලේ සුදුසුකම් පරීක්ෂාව · විනාඩි 2 යි",
+ title:"ඔබේ විදේශ රැකියා ගමන, අවංකව පරීක්ෂා කරන්න.",
+ subtitle:"ප්‍රශ්න කිහිපයකට පිළිතුරු දී යුරෝපීය හෝ නවසීලන්ත රැකියා මාර්ගය ඔබට ගැලපෙනවාද බලන්න — සත්‍ය කාල රාමු සමඟ, බොරු පොරොන්දු නැත.",
+ t1:"✔ බලපත්‍රලාභී UAE උපදේශන ආයතනය", t2:"✔ EU සහ NZ මාර්ග", t3:"✔ වංචා අවදානමක් නැත",
+ start:"මගේ සුදුසුකම පරීක්ෂා කරන්න — නොමිලේ",
+ back:"← ආපසු",
+ q:[
+  {q:"ඔබට වැඩ කිරීමට අවශ්‍ය රට?",o:["නෙදර්ලන්තය","ඩෙන්මාර්කය","අයර්ලන්තය","පෝලන්තය","ජර්මනිය","ප්‍රංශය","ඉතාලිය","ස්පාඤ්ඤය","නවසීලන්තය"]},
+  {q:"ඔබ සොයන රැකියා මට්ටම?",o:["කම්කරු / පුහුණු සේවක","විධායක / වෘත්තීය"]},
+  {q:"ඔබට වඩාත් ගැලපෙන රැකියාව?",bc:["ගබඩා සේවක","කර්මාන්තශාලා සේවක","කාර්යාල පරිපාලන","සෞඛ්‍ය සේවා","ඉදිකිරීම් සේවක","හෝටල් — අරක්කැමියා / කුක්","හෝටල් — පේස්ට්‍රි අරක්කැමියා","හෝටල් — කුස්සි සහයක","හෝටල් — හවුස්කීපිං / පිළිගැනීම"],ex:["වෛද්‍ය වෘත්තිකයා","කළමනාකරු","විකුණුම් වෘත්තිකයා"]},
+  {q:"ඔබේ සේවා පළපුරුද්ද?",o:["අවුරුද්දකට අඩු","අවුරුදු 1–3","අවුරුදු 3–5","අවුරුදු 5 ට වැඩි"]},
+  {q:"ඔබේ ඉහළම අධ්‍යාපනය?",o:["සා/පෙළ හෝ ඊට අඩු","උ/පෙළ","ඩිප්ලෝමා / NVQ","උපාධිය හෝ ඊට ඉහළ"]},
+  {q:"ඔබේ ඉංග්‍රීසි දැනුම?",o:["මූලික","හොඳයි","චතුර"]},
+  {q:"වලංගු විදේශ ගමන් බලපත්‍රයක් තිබේද?",o:["ඔව්, අවුරුදු 2+ වලංගුයි","ඔව්, අවුරුදු 2 ට අඩුයි","තවම නැත"]}
+ ],
+ nums:["ප්‍රශ්නය 1 / 7","ප්‍රශ්නය 2 / 7","ප්‍රශ්නය 3 / 7","ප්‍රශ්නය 4 / 7","ප්‍රශ්නය 5 / 7","ප්‍රශ්නය 6 / 7","ප්‍රශ්නය 7 / 7"],
+ strong:"ඉහළ ගැලපීමක්", possible:"ගැලපිය හැකියි",
+ resTitleStrong:"සුබ ආරංචියක් — ඔබ මෙම මාර්ගයට ගැලපේ.", resTitlePossible:"ඔබ සුදුසුකම් ලැබිය හැක — එකට සමාලෝචනය කරමු.",
+ rDest:"ගමනාන්තය", rRole:"රැකියාව", rTime:"සාමාන්‍ය කාලය", rPR:"ස්ථිර පදිංචි මාර්ගය", rDocs:"ලේඛන සූදානම",
+ docsOk:"සූදානම්", docsPrep:"සකස් කළ යුතුයි",
+ disclaimer:"කාල රාමු කර්මාන්ත සම්මත ඇස්තමේන්තු වේ. කිසිදු ආයතනයකට වීසා සහතික කළ නොහැක — අපි සත්‍ය ප්‍රතිඵල පෙන්වමු.",
+ cta:"නොමිලේ තක්සේරුව ඉල්ලන්න",
+ formTitle:"ඔබේ නොමිලේ තක්සේරුව ලබාගන්න", formSub:"පැය 24ක් ඇතුළත අපගේ උපදේශක WhatsApp මගින් සම්බන්ධ වේ.",
+ fName:"සම්පූර්ණ නම", fPhone:"දුරකථන / WhatsApp", fEmail:"විද්‍යුත් තැපෑල (අත්‍යවශ්‍ය නොවේ)", fCity:"ඔබේ නගරය", fSubmit:"මගේ විස්තර යවන්න",
+ privacy:"ඔබේ විස්තර Upali Immigration Consultancy වෙත පමණක් යයි, කිසිවිටෙක බෙදාගනු නොලැබේ. අපි බලපත්‍රලාභී ආයතනයකි — Trade Licence 2646027.01.",
+ doneTitle:"ස්තූතියි! ඔබේ විස්තර ලැබුණා.", doneSub:"පැය 24ක් ඇතුළත WhatsApp මගින් සම්බන්ධ වෙමු. ගමන් බලපත්‍ර විස්තර සූදානම් කරගන්න.",
+ footNote:"ලිඛිත සේවා ගිවිසුමකට පෙර අපි කිසිවිටෙක ගෙවීම් ඉල්ලන්නේ නැත. වංචනික ඒජන්තවරුන්ගෙන් ප්‍රවේශම් වන්න."
+}};
+
+/* Industry-standard timelines (months) per destination. pr=true offers a residence-visa route */
+const TIME = {
+ "Netherlands":{bc:"2–4 months",ex:"3–5 months"},
+ "Denmark":{bc:"3–5 months",ex:"3–5 months"},
+ "Ireland":{bc:"4–6 months",ex:"3–6 months"},
+ "Poland":{bc:"2–4 months",ex:"3–5 months"},
+ "Germany":{bc:"4–6 months",ex:"3–6 months"},
+ "France":{bc:"4–6 months",ex:"4–6 months"},
+ "Italy":{bc:"4–7 months",ex:"4–6 months",pr:"6–12 months"},
+ "Spain":{bc:"4–7 months",ex:"4–6 months",pr:"6–12 months"},
+ "New Zealand":{bc:"3–6 months",ex:"3–5 months"}
+};
+const DEST_EN = T.en.q[0].o;
+
+let lang="en", step=0, ans=[];
+
+function $(id){return document.getElementById(id)}
+function show(id){["home","quiz","result","lead","done"].forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo(0,0)}
+
+function applyLang(){
+ document.querySelectorAll("[data-i]").forEach(el=>{
+   const v=T[lang][el.dataset.i]; if(v!==undefined) el.innerHTML=v;
+ });
+ $("langBtn").textContent = lang==="en"?"සිංහල":"English";
+ if(!$("quiz").classList.contains("hidden")) renderQ();
+}
+function toggleLang(){lang=lang==="en"?"si":"en";applyLang()}
+
+function startQuiz(){step=0;ans=[];show("quiz");renderQ()}
+function goBack(){ if(step===0){show("home")} else {step--;ans.pop();renderQ()} }
+
+function options(i){
+ const q=T[lang].q[i];
+ if(i===2){ return ans[1]===0 ? q.bc : q.ex; }
+ return q.o;
+}
+function renderQ(){
+ $("bar").style.width=((step)/7*100)+"%";
+ $("qnum").textContent=T[lang].nums[step];
+ $("qtext").textContent=T[lang].q[step].q;
+ const box=$("opts"); box.innerHTML="";
+ options(step).forEach((o,idx)=>{
+   const b=document.createElement("button");
+   b.className="opt"; b.type="button"; b.textContent=o;
+   b.onclick=()=>{ans[step]=idx; step++; step<7?renderQ():finish();};
+   box.appendChild(b);
+ });
+}
+
+function finish(){
+ const destEn=DEST_EN[ans[0]];
+ const roleType=ans[1]===0?"bc":"ex";
+ const roleLabel=options.call ? (T[lang].q[2][roleType])[ans[2]] : "";
+ const time=TIME[destEn][roleType];
+ // simple scoring: experience>=1yr, education>=A/L for exec, passport status
+ const expOk=ans[3]>=1, eduOk=roleType==="bc"||ans[4]>=2, ppOk=ans[6]<2;
+ const strong=expOk&&eduOk&&ppOk;
+ $("badge").textContent=strong?T[lang].strong:T[lang].possible;
+ $("badge").className="result-badge "+(strong?"rb-strong":"rb-possible");
+ $("resTitle").textContent=strong?T[lang].resTitleStrong:T[lang].resTitlePossible;
+ $("rDest").textContent=T[lang].q[0].o[ans[0]];
+ $("rRole").textContent=roleLabel;
+ $("rTime").textContent=time;
+ const prRow=$("prRow");
+ if(TIME[destEn].pr){ prRow.classList.remove("hidden"); $("rPR").textContent="Spain & Italy residence visa · "+TIME[destEn].pr; }
+ else { prRow.classList.add("hidden"); }
+ $("rDocs").textContent=ppOk?T[lang].docsOk:T[lang].docsPrep;
+ window._lead={Destination:destEn,Role:T.en.q[2][roleType][ans[2]],Score:strong?"Strong":"Possible",Language:lang==="en"?"English":"Sinhala"};
+ show("result"); applyLang();
+}
+
+function submitLead(e){
+ e.preventDefault();
+ const f=new FormData(e.target);
+ const data={...Object.fromEntries(f), ...window._lead, "Lead Source":"Migration Portal"};
+ if(ZOHO_ACTION){
+   const form=document.createElement("form");
+   form.method="POST"; form.action=ZOHO_ACTION; form.style.display="none";
+   const fields={...ZOHO_HIDDEN, ...data,
+     "Description":`Destination: ${data.Destination} | Role: ${data.Role} | Match: ${data.Score} | Language: ${data.Language} | City: ${data.City||""}`};
+   for(const k in fields){ const i=document.createElement("input"); i.name=k; i.value=fields[k]; form.appendChild(i); }
+   document.body.appendChild(form);
+   // submit via hidden iframe so the user stays in the app
+   const fr=document.createElement("iframe"); fr.name="zh"; fr.style.display="none"; document.body.appendChild(fr);
+   form.target="zh"; form.submit();
+ } else {
+   console.log("Lead (Zoho not yet connected):",data);
+ }
+ show("done");
+ return false;
+}
+
+applyLang();
+</script>
+</body>
+</html>
