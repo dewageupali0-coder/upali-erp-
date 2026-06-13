@@ -291,12 +291,10 @@ function submitLead(e){
    const form=document.createElement("form");
    form.method="POST"; form.action=ZOHO_ACTION; form.style.display="none";
    const fields={...ZOHO_HIDDEN, ...data,
-     "Description":`Destination: ${data.Destination} | Role: ${data.Role} | Match: ${data.Score} | Language: ${data.Language} | City: ${data.City||""}`};
+     "Description":`Destination: ${data.Destination} | Role: ${data.Role} | Match: ${data.Score} | Language: ${data.Language} | City: ${data["Address - City"]||""}`};
    for(const k in fields){ const i=document.createElement("input"); i.name=k; i.value=fields[k]; form.appendChild(i); }
    document.body.appendChild(form);
-   // submit via hidden iframe so the user stays in the app
-   const fr=document.createElement("iframe"); fr.name="zh"; fr.style.display="none"; document.body.appendChild(fr);
-   form.target="zh"; form.submit();
+   form.submit();
  } else {
    console.log("Lead (Zoho not yet connected):",data);
  }
