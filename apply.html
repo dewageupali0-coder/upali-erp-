@@ -63,7 +63,7 @@ footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-si
     <img class="logo-img" src="logo.png" alt="Upali Immigration logo">
     <div><b>Upali Immigration</b><small>Consultancy LLC · UAE Licence 2646027.01</small></div>
   </div>
-  <button class="lang" id="langBtn" onclick="toggleLang()">සිංහල</button>
+  <button class="lang" id="langBtn" onclick="toggleLang()">Switch to සිංහල</button>
 </header>
 
 <div class="wrap">
@@ -232,7 +232,7 @@ function applyLang(){
  document.querySelectorAll("[data-i]").forEach(el=>{
    const v=T[lang][el.dataset.i]; if(v!==undefined) el.innerHTML=v;
  });
- $("langBtn").textContent = lang==="en"?"සිංහල":"English";
+ $("langBtn").textContent = lang==="en"?"Switch to සිංහල":"Switch to English";
  if(!$("quiz").classList.contains("hidden")) renderQ();
 }
 function toggleLang(){lang=lang==="en"?"si":"en";applyLang()}
