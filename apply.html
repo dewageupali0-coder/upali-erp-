@@ -114,9 +114,10 @@ footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-si
       <p class="note" data-i="formSub"></p>
       <form id="leadForm" onsubmit="return submitLead(event)">
         <label data-i="fName"></label><input name="Last Name" required maxlength="80">
-        <label data-i="fPhone"></label><input name="Phone" type="tel" required maxlength="30" placeholder="+94 7X XXX XXXX">
+        <label data-i="fPhone"></label><input name="Mobile" type="tel" required maxlength="30" placeholder="+94 7X XXX XXXX">
         <label data-i="fEmail"></label><input name="Email" type="email" maxlength="100">
-        <label data-i="fCity"></label><input name="City" maxlength="80">
+        <label data-i="fCity"></label><input name="Address - City" maxlength="255">
+        <label data-i="fCountry"></label><input name="Address - Country / Region" maxlength="100" placeholder="e.g. Sri Lanka, UAE">
         <button class="btn" type="submit" data-i="fSubmit"></button>
         <p class="note" data-i="privacy"></p>
       </form>
@@ -145,8 +146,8 @@ footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-si
       with fields: Last Name, Phone, Email, City + hidden fields below.
    2. Copy the form's ACTION URL and the hidden input values (xnQsjsdp, xmIwtLD)
       from Zoho's embed code and paste them here: */
-const ZOHO_ACTION = "";            // e.g. https://crm.zoho.com/crm/WebToLeadForm
-const ZOHO_HIDDEN = { xnQsjsdp:"", xmIwtLD:"", actionType:"TGVhZHM=", returnURL:"https://myupali.lk" };
+const ZOHO_ACTION = "https://crm.zoho.com/crm/WebToLeadForm";
+const ZOHO_HIDDEN = { xnQsjsdp:"b7dd38c616890ab637d092c2fcc84d520c46213c1082535a0b3396a4d54c0896", xmIwtLD:"819b0bf4fb446d94c6525b47f0cd999c6c4c644f408cd5c7324aa9d48f51036507cff38ec4c8ea33ab4c45469a772458", actionType:"TGVhZHM=", returnURL:"https://upali-immigration.netlify.app/apply" };
 /* Until filled in, submissions show the thank-you screen and log to console. */
 
 const T = {
@@ -174,7 +175,7 @@ en:{
  disclaimer:"Timelines are industry-standard estimates. No agency can guarantee a visa — we show you realistic outcomes based on placement history.",
  cta:"Request My Free Assessment",
  formTitle:"Get your free assessment", formSub:"Our consultant will contact you on WhatsApp within 24 hours.",
- fName:"Full name", fPhone:"Phone / WhatsApp", fEmail:"Email (optional)", fCity:"Your city", fSubmit:"Send My Details",
+ fName:"Full name", fPhone:"Phone / WhatsApp", fEmail:"Email (optional)", fCity:"Your city", fCountry:"Your country", fSubmit:"Send My Details",
  privacy:"Your details go only to Upali Immigration Consultancy and are never shared. We are a licensed consultancy — Trade Licence 2646027.01.",
  doneTitle:"Thank you! Your details are received.", doneSub:"Our consultant will contact you within 24 hours on WhatsApp. Keep your passport details ready.",
  footNote:"We never ask for payment before a written service agreement. Beware of fraudulent agents."
@@ -203,7 +204,7 @@ si:{
  disclaimer:"කාල රාමු කර්මාන්ත සම්මත ඇස්තමේන්තු වේ. කිසිදු ආයතනයකට වීසා සහතික කළ නොහැක — අපි සත්‍ය ප්‍රතිඵල පෙන්වමු.",
  cta:"නොමිලේ තක්සේරුව ඉල්ලන්න",
  formTitle:"ඔබේ නොමිලේ තක්සේරුව ලබාගන්න", formSub:"පැය 24ක් ඇතුළත අපගේ උපදේශක WhatsApp මගින් සම්බන්ධ වේ.",
- fName:"සම්පූර්ණ නම", fPhone:"දුරකථන / WhatsApp", fEmail:"විද්‍යුත් තැපෑල (අත්‍යවශ්‍ය නොවේ)", fCity:"ඔබේ නගරය", fSubmit:"මගේ විස්තර යවන්න",
+ fName:"සම්පූර්ණ නම", fPhone:"දුරකථන / WhatsApp", fEmail:"විද්‍යුත් තැපෑල (අත්‍යවශ්‍ය නොවේ)", fCity:"ඔබේ නගරය", fCountry:"ඔබේ රට", fSubmit:"මගේ විස්තර යවන්න",
  privacy:"ඔබේ විස්තර Upali Immigration Consultancy වෙත පමණක් යයි, කිසිවිටෙක බෙදාගනු නොලැබේ. අපි බලපත්‍රලාභී ආයතනයකි — Trade Licence 2646027.01.",
  doneTitle:"ස්තූතියි! ඔබේ විස්තර ලැබුණා.", doneSub:"පැය 24ක් ඇතුළත WhatsApp මගින් සම්බන්ධ වෙමු. ගමන් බලපත්‍ර විස්තර සූදානම් කරගන්න.",
  footNote:"ලිඛිත සේවා ගිවිසුමකට පෙර අපි කිසිවිටෙක ගෙවීම් ඉල්ලන්නේ නැත. වංචනික ඒජන්තවරුන්ගෙන් ප්‍රවේශම් වන්න."
