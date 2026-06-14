@@ -138,13 +138,49 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
 
-// ===== Contact Form =====
+// ===== Contact Form — Zoho CRM Integration =====
+const ZOHO_ACTION = "https://crm.zoho.com/crm/WebToLeadForm";
+const ZOHO_HIDDEN = {
+    xnQsjsdp: "b7dd38c616890ab637d092c2fcc84d520c46213c1082535a0b3396a4d54c0896",
+    xmIwtLD: "819b0bf4fb446d94c6525b47f0cd999c6c4c644f408cd5c7324aa9d48f51036507cff38ec4c8ea33ab4c45469a772458",
+    actionType: "TGVhZHM=",
+    returnURL: "https://www.myupali.lk"
+};
+
 const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData);
+
+    // Submit to Zoho CRM
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = ZOHO_ACTION;
+    form.style.display = 'none';
+
+    const fields = {
+        ...ZOHO_HIDDEN,
+        'Last Name': (data.firstName || '') + ' ' + (data.lastName || ''),
+        'Email': data.email || '',
+        'Mobile': data.phone || '',
+        'Nationality': data.nationality || '',
+        'Passport_No': data.passportNo || '',
+        'Date_of_Birth': data.dateOfBirth || '',
+        'Address - Country / Region': data.destination || '',
+        'Service_Required': data.serviceRequired || '',
+        'Description': data.message || ''
+    };
+
+    for (const k in fields) {
+        const input = document.createElement('input');
+        input.name = k;
+        input.value = fields[k];
+        form.appendChild(input);
+    }
+    document.body.appendChild(form);
+    form.submit();
 
     // Show success message
     const wrapper = document.querySelector('.contact-form-wrapper');
@@ -153,8 +189,8 @@ contactForm.addEventListener('submit', (e) => {
             <div style="width: 72px; height: 72px; background: #E6FFE6; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#38A169" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
             </div>
-            <h3 style="font-size: 24px; font-weight: 700; color: #1A202C; margin-bottom: 12px;">Message Sent Successfully!</h3>
-            <p style="font-size: 16px; color: #718096; line-height: 1.6;">Thank you, <strong>${data.firstName}</strong>! Our team will review your request and get back to you within 2 hours with a personalized quote.</p>
+            <h3 style="font-size: 24px; font-weight: 700; color: #1A202C; margin-bottom: 12px;">Application Submitted!</h3>
+            <p style="font-size: 16px; color: #718096; line-height: 1.6;">Thank you, <strong>${data.firstName}</strong>! Our team will review your application and contact you within 2 hours.</p>
             <p style="font-size: 14px; color: #A0AEC0; margin-top: 16px;">Reference: MIG-${Date.now().toString(36).toUpperCase()}</p>
         </div>
     `;
