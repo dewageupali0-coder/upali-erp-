@@ -154,15 +154,22 @@ contactForm.addEventListener('submit', (e) => {
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData);
 
-    // Submit to Zoho CRM
+    // Submit to Zoho CRM via hidden iframe so page doesn't navigate away
+    const iframe = document.createElement('iframe');
+    iframe.name = 'zoho_submit_frame';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = ZOHO_ACTION;
+    form.target = 'zoho_submit_frame';
     form.style.display = 'none';
 
     const fields = {
         ...ZOHO_HIDDEN,
-        'Last Name': (data.firstName || '') + ' ' + (data.lastName || ''),
+        'First Name': data.firstName || '',
+        'Last Name': data.lastName || data.firstName || '',
         'Email': data.email || '',
         'Mobile': data.phone || '',
         'Nationality': data.nationality || '',
