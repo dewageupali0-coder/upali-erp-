@@ -1335,6 +1335,20 @@
                             <label for="phone">Phone Number</label>
                             <input type="tel" id="phone" name="phone" placeholder="+49 xxx xxx xxxx">
                         </div>
+                        <div class="form-group">
+                            <label for="nationality">Nationality</label>
+                            <input type="text" id="nationality" name="nationality" required placeholder="e.g. Sri Lankan, Indian, Filipino">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="passportNo">Passport No</label>
+                                <input type="text" id="passportNo" name="passportNo" required placeholder="e.g. N1234567">
+                            </div>
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="destination">Destination Country</label>
@@ -1356,12 +1370,19 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="plan">Interested Plan</label>
-                                <select id="plan" name="plan">
-                                    <option value="">Select plan</option>
-                                    <option value="basic">Basic - &euro;29/mo</option>
-                                    <option value="professional">Professional - &euro;59/mo</option>
-                                    <option value="family">Family Premium - &euro;99/mo</option>
+                                <label for="serviceRequired">Service Required</label>
+                                <select id="serviceRequired" name="serviceRequired" required>
+                                    <option value="">Select service</option>
+                                    <option value="work-visa">Work Visa Processing</option>
+                                    <option value="job-placement">Job Placement</option>
+                                    <option value="family-visa">Family Reunion Visa</option>
+                                    <option value="student-visa">Student Visa</option>
+                                    <option value="pr">Permanent Residency</option>
+                                    <option value="citizenship">Citizenship Application</option>
+                                    <option value="document-attestation">Document Attestation</option>
+                                    <option value="logistics">Logistics & Relocation</option>
+                                    <option value="consultation">Immigration Consultation</option>
+                                    <option value="other">Other</option>
                                 </select>
                             </div>
                         </div>
