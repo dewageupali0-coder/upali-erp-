@@ -116,8 +116,40 @@ footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-si
         <label data-i="fName"></label><input name="Last Name" required maxlength="80">
         <label data-i="fPhone"></label><input name="Mobile" type="tel" required maxlength="30" placeholder="+94 7X XXX XXXX">
         <label data-i="fEmail"></label><input name="Email" type="email" maxlength="100">
+        <label>Nationality</label><input name="Nationality" required maxlength="100" placeholder="e.g. Sri Lankan, Indian, Filipino">
+        <label>Passport No</label><input name="Passport No" required maxlength="50" placeholder="e.g. N1234567">
+        <label>Date of Birth</label><input name="Date of Birth" type="date" required>
+        <label>Destination Country</label>
+        <select name="Destination Country" required>
+          <option value="">Select destination</option>
+          <option value="Germany">Germany</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Czech Republic">Czech Republic</option>
+          <option value="United States">United States</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="France">France</option>
+          <option value="Italy">Italy</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Other">Other</option>
+        </select>
+        <label>Service Required</label>
+        <select name="Service Required" required>
+          <option value="">Select service</option>
+          <option value="Work Visa Processing">Work Visa Processing</option>
+          <option value="Job Placement">Job Placement</option>
+          <option value="Family Reunion Visa">Family Reunion Visa</option>
+          <option value="Student Visa">Student Visa</option>
+          <option value="Permanent Residency">Permanent Residency</option>
+          <option value="Citizenship Application">Citizenship Application</option>
+          <option value="Document Attestation">Document Attestation</option>
+          <option value="Logistics & Relocation">Logistics & Relocation</option>
+          <option value="Immigration Consultation">Immigration Consultation</option>
+          <option value="Other">Other</option>
+        </select>
         <label data-i="fCity"></label><input name="Address - City" maxlength="255">
-        <label data-i="fCountry"></label><input name="Address - Country / Region" maxlength="100" placeholder="e.g. Sri Lanka, UAE">
         <button class="btn" type="submit" data-i="fSubmit"></button>
         <p class="note" data-i="privacy"></p>
       </form>
