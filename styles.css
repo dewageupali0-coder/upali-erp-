@@ -201,9 +201,11 @@ input, select, textarea { font-family: inherit; }
 
 .footer-brand .logo-img {
     height: 64px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 8px;
+    width: 64px;
+    background: #ffffff;
+    border-radius: 50%;
     padding: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 /* Responsive: hide redundant text on smaller screens (logo image already contains branding) */
