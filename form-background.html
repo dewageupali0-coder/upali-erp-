@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Background Check Form — Upali Immigration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green:#1a5c2b; --green-dark:#0f3a1a; --gold:#f0a500;
+      --off-white:#f8f9f4; --text:#2c2c2c; --text-light:#666;
+      --border:#cdd6c9; --radius:6px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Raleway',sans-serif;color:var(--text);background:#eef1ea;padding:20px 16px 48px}
+
+    /* Toolbar */
+    .toolbar{max-width:900px;margin:0 auto 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .toolbar h2{font-family:'Playfair Display',serif;color:var(--green);font-size:1rem;margin-right:auto}
+    .btn{padding:8px 18px;border:none;border-radius:var(--radius);font-family:'Raleway',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;letter-spacing:.04em;transition:opacity .2s}
+    .btn:hover{opacity:.85}
+    .btn-green{background:var(--green);color:#fff}
+    .btn-gold{background:var(--gold);color:#fff}
+    .btn-outline{background:transparent;border:1.5px solid var(--green);color:var(--green)}
+
+    /* Document */
+    .doc{max-width:900px;margin:0 auto;background:#fff;border-radius:10px;box-shadow:0 4px 32px rgba(0,0,0,.12);overflow:hidden}
+
+    /* Header */
+    .doc-header{background:var(--green);padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .doc-header img{height:62px;filter:brightness(0) invert(1)}
+    .doc-header .hdr-right{text-align:right}
+    .doc-header h1{font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem;letter-spacing:.04em}
+    .doc-header .sub{color:rgba(255,255,255,.8);font-size:.78rem;margin-top:4px}
+    .doc-header .conf-badge{display:inline-block;background:var(--gold);color:#fff;font-size:.68rem;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:.08em;margin-top:8px}
+    .gold-bar{height:4px;background:var(--gold)}
+
+    /* Body */
+    .doc-body{padding:28px 36px}
+
+    /* Client ref row */
+    .meta-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;padding:14px 16px;background:var(--off-white);border-radius:var(--radius)}
+    .meta-field label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:4px}
+    .meta-field input{width:100%;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-family:'Raleway',sans-serif;font-size:.82rem;color:var(--text);padding:2px 4px;outline:none}
+    .meta-field input:focus{border-color:var(--green)}
+
+    /* Section */
+    .section{margin-bottom:28px}
+    .section-header{background:var(--green);color:#fff;padding:8px 16px;border-radius:var(--radius) var(--radius) 0 0;display:flex;align-items:center;gap:10px}
+    .section-header .sec-num{background:var(--gold);color:#fff;font-weight:700;font-size:.78rem;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .section-header h3{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .section-body{border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:16px}
+
+    /* Form grid */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px}
+    .form-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+    .form-grid.cols-1{grid-template-columns:1fr}
+    .field{display:flex;flex-direction:column;gap:4px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-light)}
+    .field input,.field select,.field textarea{
+      border:none;border-bottom:1.5px solid var(--border);
+      background:transparent;padding:5px 4px;
+      font-family:'Raleway',sans-serif;font-size:.85rem;color:var(--text);
+      outline:none;transition:border-color .2s;width:100%
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green)}
+    .field textarea{border:1.5px solid var(--border);border-radius:var(--radius);padding:8px;resize:vertical;min-height:56px}
+    .field textarea:focus{border-color:var(--green)}
+
+    /* Checkboxes */
+    .check-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:6px 0}
+    .check-label{display:flex;align-items:center;gap:6px;font-size:.83rem;cursor:pointer;color:var(--text)}
+    .check-label input[type=checkbox]{width:14px;height:14px;accent-color:var(--green);cursor:pointer}
+    .check-label input[type=radio]{width:14px;height:14px;accent-color:var(--green);cursor:pointer}
+    .field-inline{display:flex;align-items:center;gap:10px;margin:6px 0}
+    .field-inline span{font-size:.82rem;font-weight:600;white-space:nowrap}
+    .follow-up{background:#f0f5ee;border-left:3px solid var(--green);padding:10px 14px;border-radius:0 var(--radius) var(--radius) 0;margin-top:8px}
+    .follow-up label{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-light);display:block;margin-bottom:4px}
+    .follow-up input,.follow-up textarea{
+      width:100%;border:none;border-bottom:1.5px dashed var(--border);
+      background:transparent;font-family:'Raleway',sans-serif;font-size:.83rem;
+      color:var(--text);padding:3px 4px;outline:none
+    }
+    .follow-up textarea{border:1.5px dashed var(--border);border-radius:var(--radius);padding:6px;resize:vertical;min-height:48px;margin-top:4px}
+
+    /* Declaration */
+    .declaration{background:var(--off-white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:24px;font-size:.82rem;line-height:1.7;color:var(--text)}
+    .declaration p{margin-bottom:6px}
+
+    /* Signature grid */
+    .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:24px}
+    .sig-box{text-align:center}
+    .sig-line-top{border-top:1.5px solid var(--green);margin:44px 0 6px}
+    .sig-box p{font-size:.75rem;color:var(--text-light)}
+    .sig-box strong{font-size:.8rem;color:var(--green);display:block;margin-top:2px}
+    .sig-fields{text-align:left;margin-top:10px;display:flex;flex-direction:column;gap:8px}
+    .sig-fields .field label{font-size:.68rem}
+
+    /* Footer */
+    .doc-footer{background:var(--green-dark,#0f3a1a);padding:12px 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .doc-footer p{color:rgba(255,255,255,.7);font-size:.7rem}
+    .doc-footer .conf{background:var(--gold);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px}
+
+    @media print{
+      body{background:#fff;padding:0}
+      .toolbar{display:none}
+      .doc{box-shadow:none;border-radius:0;max-width:100%}
+      .field input,.field select,.field textarea,.meta-field input,.follow-up input,.follow-up textarea{border-color:#ccc!important}
+      @page{margin:.6cm;size:A4}
+    }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>Upali ERP — Client Background Check Form</h2>
+  <a href="portal.html" class="btn btn-outline">&#8592; Portal</a>
+  <button class="btn btn-gold" onclick="window.print()">&#128438; Print / Save PDF</button>
+  <button class="btn btn-green" onclick="clearForm()">&#8635; Clear Form</button>
+</div>
+
+<div class="doc">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <img src="images/logo.png" alt="Upali Logo" />
+    <div class="hdr-right">
+      <h1>Client Background Check Form</h1>
+      <div class="sub">Immigration Consulting Services</div>
+      <div class="conf-badge">CONFIDENTIAL &amp; PRIVATE</div>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+
+  <div class="doc-body">
+
+    <!-- Meta -->
+    <div class="meta-row">
+      <div class="meta-field">
+        <label>File / Reference No.</label>
+        <input type="text" placeholder="UIC-2026-001" />
+      </div>
+      <div class="meta-field">
+        <label>Date Received</label>
+        <input type="date" />
+      </div>
+      <div class="meta-field">
+        <label>Assigned Consultant</label>
+        <input type="text" placeholder="Consultant Name" />
+      </div>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">1</div>
+        <h3>Personal Information</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="field full">
+            <label>Full Name (as per passport)</label>
+            <input type="text" placeholder="Enter full legal name" />
+          </div>
+          <div class="field">
+            <label>Date of Birth</label>
+            <input type="date" />
+          </div>
+          <div class="field">
+            <label>Place of Birth</label>
+            <input type="text" placeholder="City, Country" />
+          </div>
+          <div class="field">
+            <label>Gender</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="gender" /> Male</label>
+              <label class="check-label"><input type="radio" name="gender" /> Female</label>
+              <label class="check-label"><input type="radio" name="gender" /> Other</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Marital Status</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="marital" /> Single</label>
+              <label class="check-label"><input type="radio" name="marital" /> Married</label>
+              <label class="check-label"><input type="radio" name="marital" /> Divorced</label>
+              <label class="check-label"><input type="radio" name="marital" /> Widowed</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Nationality</label>
+            <input type="text" placeholder="e.g. Sri Lankan" />
+          </div>
+          <div class="field">
+            <label>Country of Birth</label>
+            <input type="text" placeholder="Country" />
+          </div>
+          <div class="field full">
+            <label>Permanent Address</label>
+            <input type="text" placeholder="Full permanent address" />
+          </div>
+          <div class="field full">
+            <label>Current Residential Address</label>
+            <input type="text" placeholder="Current address (if different)" />
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" placeholder="email@example.com" />
+          </div>
+          <div class="field">
+            <label>Telephone / Mobile</label>
+            <input type="tel" placeholder="+971 XX XXX XXXX" />
+          </div>
+          <div class="field">
+            <label>National ID / NIC Number</label>
+            <input type="text" placeholder="ID number" />
+          </div>
+          <div class="field">
+            <label>Tax Identification No. (if any)</label>
+            <input type="text" placeholder="TIN / TRN" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">2</div>
+        <h3>Passport / Travel Document</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid cols-3">
+          <div class="field">
+            <label>Passport Number</label>
+            <input type="text" placeholder="Passport no." />
+          </div>
+          <div class="field">
+            <label>Country of Issue</label>
+            <input type="text" placeholder="Country" />
+          </div>
+          <div class="field">
+            <label>Issue Date</label>
+            <input type="date" />
+          </div>
+          <div class="field">
+            <label>Expiry Date</label>
+            <input type="date" />
+          </div>
+          <div class="field full">
+            <label>Passport Type</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="pptype" /> Ordinary</label>
+              <label class="check-label"><input type="radio" name="pptype" /> Official</label>
+              <label class="check-label"><input type="radio" name="pptype" /> Diplomatic</label>
+              <label class="check-label"><input type="radio" name="pptype" /> Emergency</label>
+            </div>
+          </div>
+          <div class="field full">
+            <label>Any Previous Passports? (Provide all numbers)</label>
+            <input type="text" placeholder="List all previous passport numbers" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">3</div>
+        <h3>Immigration &amp; Visa History</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid cols-1">
+
+          <div class="field">
+            <label>Have you previously applied for any visa?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="prev_visa" /> Yes</label>
+              <label class="check-label"><input type="radio" name="prev_visa" /> No</label>
+            </div>
+            <div class="follow-up">
+              <label>If Yes — list countries, visa types and dates</label>
+              <textarea placeholder="Country / Visa Type / Year&#10;e.g. UAE — Tourist — 2023&#10;     UK — Student — 2021"></textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Have you ever been refused a visa or entry?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="refused" /> Yes</label>
+              <label class="check-label"><input type="radio" name="refused" /> No</label>
+            </div>
+            <div class="follow-up">
+              <label>If Yes — country, date, reason</label>
+              <textarea placeholder="Provide full details of refusal(s)"></textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Have you ever been deported or removed from any country?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="deported" /> Yes</label>
+              <label class="check-label"><input type="radio" name="deported" /> No</label>
+            </div>
+            <div class="follow-up">
+              <label>If Yes — country, date, full details</label>
+              <textarea placeholder="Provide full details"></textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Do you currently hold any valid visa?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="curr_visa" /> Yes</label>
+              <label class="check-label"><input type="radio" name="curr_visa" /> No</label>
+            </div>
+            <div class="follow-up">
+              <label>If Yes — country and visa type</label>
+              <input type="text" placeholder="e.g. UAE — Employment Visa (valid until DD/MM/YYYY)" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">4</div>
+        <h3>Criminal Record Declaration</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid cols-1">
+
+          <div class="field">
+            <label>Have you ever been arrested, charged, or convicted of any crime?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="criminal" /> Yes</label>
+              <label class="check-label"><input type="radio" name="criminal" /> No</label>
+            </div>
+            <div class="follow-up">
+              <label>If Yes — country, nature of offence, outcome, date</label>
+              <textarea placeholder="Provide full details of arrest / charge / conviction"></textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Are there any pending legal proceedings against you?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="legal" /> Yes</label>
+              <label class="check-label"><input type="radio" name="legal" /> No</label>
+            </div>
+            <div class="follow-up">
+              <label>If Yes — provide details</label>
+              <textarea placeholder="Nature of proceedings, jurisdiction, current status"></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">5</div>
+        <h3>Employment History</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="field">
+            <label>Current Employer / Company</label>
+            <input type="text" placeholder="Employer name" />
+          </div>
+          <div class="field">
+            <label>Job Title / Designation</label>
+            <input type="text" placeholder="Your current role" />
+          </div>
+          <div class="field">
+            <label>Employment Start Date</label>
+            <input type="date" />
+          </div>
+          <div class="field">
+            <label>Work Country</label>
+            <input type="text" placeholder="Country where you work" />
+          </div>
+          <div class="field">
+            <label>Monthly Salary (AED or equivalent)</label>
+            <input type="text" placeholder="Amount + currency" />
+          </div>
+          <div class="field">
+            <label>Employment Type</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="emptype" /> Full-time</label>
+              <label class="check-label"><input type="radio" name="emptype" /> Part-time</label>
+              <label class="check-label"><input type="radio" name="emptype" /> Self-employed</label>
+              <label class="check-label"><input type="radio" name="emptype" /> Unemployed</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Previous Employer (last 5 years)</label>
+            <input type="text" placeholder="Previous employer / company name" />
+          </div>
+          <div class="field">
+            <label>Previous Employment Dates &amp; Roles</label>
+            <input type="text" placeholder="From–To / Role / Company" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">6</div>
+        <h3>Education Background</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid cols-3">
+          <div class="field full">
+            <label>Highest Qualification Obtained</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="qual" /> O/L</label>
+              <label class="check-label"><input type="radio" name="qual" /> A/L</label>
+              <label class="check-label"><input type="radio" name="qual" /> Diploma</label>
+              <label class="check-label"><input type="radio" name="qual" /> Bachelor's</label>
+              <label class="check-label"><input type="radio" name="qual" /> Master's</label>
+              <label class="check-label"><input type="radio" name="qual" /> PhD</label>
+              <label class="check-label"><input type="radio" name="qual" /> Other</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Institution Name</label>
+            <input type="text" placeholder="University / College / School" />
+          </div>
+          <div class="field">
+            <label>Country</label>
+            <input type="text" placeholder="Country of study" />
+          </div>
+          <div class="field">
+            <label>Year of Graduation</label>
+            <input type="text" placeholder="YYYY" />
+          </div>
+          <div class="field">
+            <label>Field of Study</label>
+            <input type="text" placeholder="e.g. Computer Science, Nursing" />
+          </div>
+          <div class="field full">
+            <label>English Proficiency</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="english" /> Yes — IELTS</label>
+              <label class="check-label"><input type="radio" name="english" /> Yes — TOEFL / Other</label>
+              <label class="check-label"><input type="radio" name="english" /> No</label>
+            </div>
+            <div class="follow-up" style="margin-top:6px">
+              <label>If Yes — score and test date</label>
+              <input type="text" placeholder="e.g. IELTS 7.0 — Overall (L:7.5 R:7.0 W:6.5 S:7.0) — Jan 2025" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">7</div>
+        <h3>Family Information</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="field">
+            <label>Spouse / Partner Full Name</label>
+            <input type="text" placeholder="Full name as per passport" />
+          </div>
+          <div class="field">
+            <label>Spouse Nationality</label>
+            <input type="text" placeholder="Nationality" />
+          </div>
+          <div class="field">
+            <label>Spouse Passport Number</label>
+            <input type="text" placeholder="Passport no." />
+          </div>
+          <div class="field">
+            <label>Spouse Date of Birth</label>
+            <input type="date" />
+          </div>
+          <div class="field full">
+            <label>Are any dependants included in this application?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="dependants" /> Yes</label>
+              <label class="check-label"><input type="radio" name="dependants" /> No</label>
+            </div>
+            <div class="follow-up">
+              <label>If Yes — list names, date of birth, and relationship</label>
+              <textarea placeholder="Name / Date of Birth / Relationship&#10;e.g. John Smith / 12-Jan-2015 / Son"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 8 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">8</div>
+        <h3>Destination &amp; Visa Purpose</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="field">
+            <label>Destination Country</label>
+            <input type="text" placeholder="e.g. Ireland" />
+          </div>
+          <div class="field">
+            <label>Visa Type / Category</label>
+            <input type="text" placeholder="e.g. Employment Permit / Work Visa" />
+          </div>
+          <div class="field">
+            <label>Purpose of Travel</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="purpose" /> Employment</label>
+              <label class="check-label"><input type="radio" name="purpose" /> Study</label>
+              <label class="check-label"><input type="radio" name="purpose" /> Family Reunion</label>
+              <label class="check-label"><input type="radio" name="purpose" /> Business</label>
+              <label class="check-label"><input type="radio" name="purpose" /> Other</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Intended Travel Date</label>
+            <input type="date" />
+          </div>
+          <div class="field">
+            <label>Intended Duration of Stay</label>
+            <input type="text" placeholder="e.g. 2 years / Permanent" />
+          </div>
+          <div class="field">
+            <label>Do you have a job offer?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="joboffer" /> Yes</label>
+              <label class="check-label"><input type="radio" name="joboffer" /> No — Seeking Employment</label>
+            </div>
+          </div>
+          <div class="field full">
+            <label>Employer Name &amp; Country (if applicable)</label>
+            <input type="text" placeholder="Employer name, city, country" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 9 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">9</div>
+        <h3>Financial Information</h3>
+      </div>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="field">
+            <label>Source of Funds</label>
+            <div class="check-row" style="flex-wrap:wrap;gap:12px">
+              <label class="check-label"><input type="checkbox" /> Employment Salary</label>
+              <label class="check-label"><input type="checkbox" /> Savings</label>
+              <label class="check-label"><input type="checkbox" /> Business Income</label>
+              <label class="check-label"><input type="checkbox" /> Family Support</label>
+              <label class="check-label"><input type="checkbox" /> Other</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Bank Name</label>
+            <input type="text" placeholder="Primary bank name" />
+          </div>
+          <div class="field">
+            <label>Average Monthly Bank Balance</label>
+            <input type="text" placeholder="Amount + currency" />
+          </div>
+          <div class="field">
+            <label>Do you own property?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="property" /> Yes</label>
+              <label class="check-label"><input type="radio" name="property" /> No</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Do you have any outstanding loans?</label>
+            <div class="check-row">
+              <label class="check-label"><input type="radio" name="loans" /> Yes</label>
+              <label class="check-label"><input type="radio" name="loans" /> No</label>
+            </div>
+          </div>
+          <div class="field full">
+            <label>Additional Financial Notes</label>
+            <textarea placeholder="Any other relevant financial information"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 10 — Declaration -->
+    <div class="section">
+      <div class="section-header">
+        <div class="sec-num">10</div>
+        <h3>Declaration &amp; Signature</h3>
+      </div>
+      <div class="section-body">
+        <div class="declaration">
+          <p>I declare that all information provided in this form is <strong>true, accurate, and complete</strong> to the best of my knowledge. I understand that:</p>
+          <ul style="padding-left:20px;margin:8px 0;line-height:2">
+            <li>Providing false or misleading information may result in <strong>termination of services without refund</strong>.</li>
+            <li>False information may affect my immigration application and could lead to <strong>legal consequences</strong>.</li>
+            <li>Upali Immigration Service Consultancy reserves the right to conduct background verification checks.</li>
+            <li>This information is held <strong>confidentially</strong> and used solely for immigration consultancy purposes.</li>
+          </ul>
+        </div>
+
+        <div class="sig-grid">
+          <div class="sig-box">
+            <div class="sig-line-top"></div>
+            <p>Client Signature</p>
+            <div class="sig-fields">
+              <div class="field">
+                <label>Full Name</label>
+                <input type="text" placeholder="Print full name" />
+              </div>
+              <div class="field">
+                <label>Date</label>
+                <input type="date" />
+              </div>
+              <div class="field">
+                <label>Place</label>
+                <input type="text" placeholder="City, Country" />
+              </div>
+            </div>
+          </div>
+          <div class="sig-box">
+            <div class="sig-line-top"></div>
+            <p>Received &amp; Verified by</p>
+            <strong>Upali Immigration Service Consultancy</strong>
+            <div class="sig-fields">
+              <div class="field">
+                <label>Consultant Name</label>
+                <input type="text" placeholder="Consultant" />
+              </div>
+              <div class="field">
+                <label>Date</label>
+                <input type="date" />
+              </div>
+              <div class="field">
+                <label>Stamp / TRN</label>
+                <input type="text" placeholder="TRN: 100XXXXXXXXXXX" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <div class="doc-footer">
+    <p>Upali Immigration Service Consultancy &nbsp;|&nbsp; Dubai, UAE &nbsp;|&nbsp; info@upali.ae</p>
+    <div class="conf">CONFIDENTIAL</div>
+    <p>Form v1.0 — 2026 &nbsp;|&nbsp; Page 1 of 1</p>
+  </div>
+
+</div><!-- /doc -->
+
+<script>
+  function clearForm() {
+    if (!confirm('Clear all form data?')) return;
+    document.querySelectorAll('input:not([type=radio]):not([type=checkbox])').forEach(el => el.value = '');
+    document.querySelectorAll('textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(el => el.checked = false);
+  }
+</script>
+</body>
+</html>

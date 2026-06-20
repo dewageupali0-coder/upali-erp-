@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tax Invoice — Upali Immigration Service Consultancy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ── */
+    :root {
+      --green:      #1a5c2b;
+      --green-dark: #0f3a1a;
+      --gold:       #f0a500;
+      --off-white:  #f8f9f4;
+      --text:       #2c2c2c;
+      --text-light: #666666;
+      --border:     #d0d9cc;
+      --radius:     6px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      color: var(--text);
+      background: #eef1ea;
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+    }
+
+    /* ── Toolbar (hidden on print) ── */
+    .toolbar {
+      max-width: 860px;
+      margin: 0 auto 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .toolbar h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--green);
+      font-size: 1rem;
+      margin-right: auto;
+    }
+    .btn {
+      padding: 8px 18px;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-green  { background: var(--green); color: #fff; }
+    .btn-gold   { background: var(--gold);  color: #fff; }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--green);
+      color: var(--green);
+    }
+    .btn-sm { padding: 4px 10px; font-size: 0.75rem; }
+
+    /* ── Invoice Paper ── */
+    .invoice {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    /* ── Header Band ── */
+    .inv-header {
+      background: var(--green);
+      color: #fff;
+      padding: 28px 36px 24px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .inv-header .logo-block img {
+      height: 64px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .inv-header .logo-block .company-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 8px;
+      line-height: 1.3;
+      color: #fff;
+    }
+    .inv-header .company-sub {
+      font-size: 0.75rem;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+    .inv-title-block {
+      text-align: right;
+    }
+    .inv-title-block h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .inv-title-block .inv-meta {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      opacity: 0.9;
+      line-height: 1.9;
+    }
+    .inv-title-block .inv-meta strong { font-weight: 600; }
+
+    /* ── Gold accent bar ── */
+    .gold-bar { height: 4px; background: var(--gold); }
+
+    /* ── Body ── */
+    .inv-body { padding: 32px 36px; }
+
+    /* ── Party Info (From / Bill To) ── */
+    .party-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .party-box { padding: 16px 18px; border-radius: var(--radius); }
+    .party-box.from { background: var(--off-white); border-left: 3px solid var(--green); }
+    .party-box.to   { background: #fff8e8;          border-left: 3px solid var(--gold); }
+    .party-box h3 {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .party-box p {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    .party-box strong { font-weight: 600; }
+
+    /* ── Editable fields ── */
+    .editable {
+      border: none;
+      border-bottom: 1.5px dashed var(--border);
+      background: transparent;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text);
+      width: 100%;
+      padding: 1px 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .editable:focus { border-color: var(--green); }
+    .editable-inline {
+      border: none;
+      border-bottom: 1.5px dashed var(--border);
+      background: transparent;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text);
+      padding: 1px 4px;
+      outline: none;
+      min-width: 60px;
+    }
+    .editable-inline:focus { border-color: var(--green); }
+    .inv-title-block .editable-inv {
+      border: none;
+      border-bottom: 1px dashed rgba(255,255,255,0.5);
+      background: transparent;
+      color: #fff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8rem;
+      text-align: right;
+      outline: none;
+      width: 130px;
+    }
+    .inv-title-block .editable-inv:focus { border-color: var(--gold); }
+
+    /* ── Service Badge ── */
+    .service-badge {
+      display: inline-block;
+      background: #e8f4eb;
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Line Items Table ── */
+    .inv-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      margin-bottom: 4px;
+    }
+    .inv-table thead tr {
+      background: var(--green);
+      color: #fff;
+    }
+    .inv-table thead th {
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .inv-table thead th.right { text-align: right; }
+    .inv-table thead th.center { text-align: center; }
+
+    .inv-table tbody tr:nth-child(even) { background: var(--off-white); }
+    .inv-table tbody tr:hover { background: #f0f5ee; }
+    .inv-table tbody td {
+      padding: 10px 12px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+    .inv-table tbody td.right { text-align: right; font-variant-numeric: tabular-nums; }
+    .inv-table tbody td.center { text-align: center; }
+    .inv-table tbody td .desc-main { font-weight: 600; color: var(--green); margin-bottom: 2px; }
+    .inv-table tbody td .desc-sub { font-size: 0.75rem; color: var(--text-light); }
+
+    .vat-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      letter-spacing: 0.04em;
+    }
+    .vat-zero    { background: #e8f4eb; color: var(--green); }
+    .vat-oos     { background: #fff3cd; color: #856404; }
+    .vat-standard{ background: #fde8e8; color: #c0392b; }
+
+    .btn-del-row {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0 4px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .btn-del-row:hover { color: #e74c3c; }
+
+    /* ── Add Row ── */
+    .add-row-wrap { margin: 8px 0 24px; }
+
+    /* ── Totals ── */
+    .totals-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 28px;
+    }
+    .totals-table {
+      width: 320px;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    .totals-table td { padding: 7px 12px; }
+    .totals-table tr.subtotal td { border-top: 1px solid var(--border); }
+    .totals-table tr.vat-row td   { color: var(--text-light); }
+    .totals-table tr.grand td {
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 0;
+    }
+    .totals-table td.label { font-weight: 500; }
+    .totals-table td.amount { text-align: right; font-variant-numeric: tabular-nums; }
+    .totals-table tr.grand td:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .totals-table tr.grand td:last-child  { border-radius: 0 var(--radius) var(--radius) 0; }
+
+    /* ── Amount in Words ── */
+    .amount-words {
+      background: var(--off-white);
+      border-left: 3px solid var(--gold);
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      color: var(--text);
+      margin-bottom: 24px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .amount-words span { font-weight: 600; color: var(--green); }
+
+    /* ── Notes & Terms ── */
+    .notes-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .notes-box h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .notes-box textarea {
+      width: 100%;
+      min-height: 80px;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 8px 10px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text);
+      resize: vertical;
+      outline: none;
+      background: var(--off-white);
+    }
+    .notes-box textarea:focus { border-color: var(--green); }
+
+    /* ── Payment Details ── */
+    .payment-box {
+      background: var(--off-white);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 0.8rem;
+      line-height: 1.9;
+      margin-bottom: 28px;
+    }
+    .payment-box h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+    .payment-grid dt { color: var(--text-light); font-size: 0.75rem; }
+    .payment-grid dd { font-weight: 600; }
+
+    /* ── Signature ── */
+    .sig-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 24px;
+    }
+    .sig-box { text-align: center; }
+    .sig-line {
+      border-top: 1.5px solid var(--green);
+      margin: 40px 0 6px;
+    }
+    .sig-box p { font-size: 0.75rem; color: var(--text-light); }
+    .sig-box strong { font-size: 0.8rem; color: var(--green); display: block; margin-top: 2px; }
+
+    /* ── Footer Band ── */
+    .inv-footer {
+      background: var(--green-dark, #0f3a1a);
+      padding: 14px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .inv-footer p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.72rem;
+    }
+    .inv-footer .trn-badge {
+      background: var(--gold);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── VAT Note ── */
+    .vat-note {
+      background: #fff8e8;
+      border: 1px solid #f0e0a0;
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      font-size: 0.75rem;
+      color: #7a6020;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .vat-note strong { color: #5a4010; }
+
+    /* ── Print Styles ── */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .toolbar, .add-row-wrap, .btn-del-row { display: none !important; }
+      .invoice { box-shadow: none; border-radius: 0; max-width: 100%; }
+      .editable, .editable-inline, .editable-inv { border-bottom: none !important; }
+      textarea { border: none !important; background: transparent !important; resize: none; }
+      .inv-table tbody tr:hover { background: inherit; }
+      @page { margin: 0.5cm; size: A4; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── TOOLBAR ── -->
+<div class="toolbar">
+  <h2>Upali ERP — Tax Invoice Builder</h2>
+  <button class="btn btn-outline btn-sm" onclick="addRow()">+ Add Line Item</button>
+  <button class="btn btn-gold" onclick="window.print()">&#128438; Print / Save PDF</button>
+  <button class="btn btn-green" onclick="clearForm()">&#8635; New Invoice</button>
+</div>
+
+<!-- ── INVOICE PAPER ── -->
+<div class="invoice" id="invoice">
+
+  <!-- Header -->
+  <div class="inv-header">
+    <div class="logo-block">
+      <img src="images/logo.png" alt="Upali Logo" />
+      <div class="company-name">Upali Immigration Service<br>Consultancy</div>
+      <div class="company-sub">
+        Dubai, United Arab Emirates<br>
+        Tel: +971 XX XXX XXXX &nbsp;|&nbsp; info@upali.ae
+      </div>
+    </div>
+    <div class="inv-title-block">
+      <h1>Tax Invoice</h1>
+      <div class="inv-meta">
+        <strong>Invoice No.:</strong>
+        <input class="editable-inv" id="invNo" type="text" value="UIC-2026-001" /><br>
+        <strong>Invoice Date:</strong>
+        <input class="editable-inv" id="invDate" type="date" value="2026-05-26" /><br>
+        <strong>Supply Date:</strong>
+        <input class="editable-inv" id="supplyDate" type="date" value="2026-05-26" /><br>
+        <strong>Due Date:</strong>
+        <input class="editable-inv" id="dueDate" type="date" value="2026-06-05" />
+      </div>
+    </div>
+  </div>
+
+  <div class="gold-bar"></div>
+
+  <!-- Body -->
+  <div class="inv-body">
+
+    <!-- Party Info -->
+    <div class="party-row">
+      <!-- From -->
+      <div class="party-box from">
+        <h3>From (Supplier)</h3>
+        <p>
+          <strong>Upali Immigration Service Consultancy</strong><br>
+          Trade Licence No.: <input class="editable" value="CN-XXXXXXXX" style="width:130px" /><br>
+          TRN: <input class="editable" id="supplierTRN" value="100XXXXXXXXXXX" style="width:140px" /><br>
+          Dubai, United Arab Emirates<br>
+          Tel: <input class="editable" value="+971 XX XXX XXXX" style="width:130px" /><br>
+          Email: <input class="editable" value="info@upali.ae" style="width:150px" />
+        </p>
+      </div>
+      <!-- Bill To -->
+      <div class="party-box to">
+        <h3>Bill To (Client)</h3>
+        <p>
+          <strong><input class="editable" id="clientName" placeholder="Client Full Name" value="" /></strong><br>
+          Passport No.: <input class="editable" id="passportNo" placeholder="Passport number" value="" /><br>
+          Nationality: <input class="editable" id="nationality" placeholder="Nationality" value="" /><br>
+          Address: <input class="editable" id="clientAddr" placeholder="UAE Address" value="" /><br>
+          Phone: <input class="editable" id="clientPhone" placeholder="+971 XX XXX XXXX" value="" /><br>
+          Email: <input class="editable" id="clientEmail" placeholder="client@email.com" value="" />
+        </p>
+      </div>
+    </div>
+
+    <!-- Service Type Badge -->
+    <div>
+      <span class="service-badge">&#9992; EU Work Visa — Ireland | End-to-End Service</span>
+    </div>
+
+    <!-- VAT Note -->
+    <div class="vat-note">
+      <strong>VAT Note:</strong> Consultancy services (Line 1) and international air ticket (Line 4) are
+      <strong>zero-rated (0%)</strong> under UAE VAT Law. Government disbursements (Lines 2 &amp; 3) are
+      <strong>outside the scope</strong> of UAE VAT and passed through at exact cost per third-party receipts attached.
+      Total VAT due: <strong>AED 0.00</strong>.
+    </div>
+
+    <!-- Line Items -->
+    <table class="inv-table" id="itemsTable">
+      <thead>
+        <tr>
+          <th style="width:32px">#</th>
+          <th>Description</th>
+          <th class="right" style="width:100px">Amount (AED)</th>
+          <th class="center" style="width:100px">VAT Rate</th>
+          <th class="right" style="width:80px">VAT (AED)</th>
+          <th class="right" style="width:100px">Line Total</th>
+          <th style="width:28px"></th>
+        </tr>
+      </thead>
+      <tbody id="lineItems">
+        <!-- Row 1 -->
+        <tr>
+          <td>1</td>
+          <td>
+            <div class="desc-main">
+              <input class="editable" style="font-weight:600;color:#1a5c2b" value="Consultancy Fee — EU Work Visa (Ireland)" />
+            </div>
+            <div class="desc-sub">
+              <input class="editable" value="End-to-end consultancy: onboarding, documentation, application, departure support" />
+            </div>
+          </td>
+          <td class="right"><input class="editable-inline amount" type="number" value="8000" oninput="recalc()" style="width:80px;text-align:right" /></td>
+          <td class="center">
+            <select class="editable-inline vat-sel" onchange="recalc()" style="width:90px">
+              <option value="zero" selected>0% Zero</option>
+              <option value="standard">5% Std</option>
+              <option value="oos">Out of Scope</option>
+            </select>
+          </td>
+          <td class="right vat-amt">0.00</td>
+          <td class="right line-total">8,000.00</td>
+          <td><button class="btn-del-row" onclick="deleteRow(this)" title="Remove">&#10005;</button></td>
+        </tr>
+        <!-- Row 2 -->
+        <tr>
+          <td>2</td>
+          <td>
+            <div class="desc-main">
+              <input class="editable" style="font-weight:600;color:#1a5c2b" value="Visa Application Fee — Government Disbursement" />
+            </div>
+            <div class="desc-sub">
+              <input class="editable" value="NZ Immigration / Ireland DETE application fee — matched to actual receipt" />
+            </div>
+          </td>
+          <td class="right"><input class="editable-inline amount" type="number" value="3000" oninput="recalc()" style="width:80px;text-align:right" /></td>
+          <td class="center">
+            <select class="editable-inline vat-sel" onchange="recalc()" style="width:90px">
+              <option value="zero">0% Zero</option>
+              <option value="standard">5% Std</option>
+              <option value="oos" selected>Out of Scope</option>
+            </select>
+          </td>
+          <td class="right vat-amt">—</td>
+          <td class="right line-total">3,000.00</td>
+          <td><button class="btn-del-row" onclick="deleteRow(this)" title="Remove">&#10005;</button></td>
+        </tr>
+        <!-- Row 3 -->
+        <tr>
+          <td>3</td>
+          <td>
+            <div class="desc-main">
+              <input class="editable" style="font-weight:600;color:#1a5c2b" value="Biometric / Embassy Appointment Fee — Disbursement" />
+            </div>
+            <div class="desc-sub">
+              <input class="editable" value="Government disbursement — matched to actual receipt attached" />
+            </div>
+          </td>
+          <td class="right"><input class="editable-inline amount" type="number" value="1000" oninput="recalc()" style="width:80px;text-align:right" /></td>
+          <td class="center">
+            <select class="editable-inline vat-sel" onchange="recalc()" style="width:90px">
+              <option value="zero">0% Zero</option>
+              <option value="standard">5% Std</option>
+              <option value="oos" selected>Out of Scope</option>
+            </select>
+          </td>
+          <td class="right vat-amt">—</td>
+          <td class="right line-total">1,000.00</td>
+          <td><button class="btn-del-row" onclick="deleteRow(this)" title="Remove">&#10005;</button></td>
+        </tr>
+        <!-- Row 4 -->
+        <tr>
+          <td>4</td>
+          <td>
+            <div class="desc-main">
+              <input class="editable" style="font-weight:600;color:#1a5c2b" value="International Air Ticket — UAE to Ireland" />
+            </div>
+            <div class="desc-sub">
+              <input class="editable" value="Zero-rated under Article 45(3), UAE VAT Law — international passenger transport" />
+            </div>
+          </td>
+          <td class="right"><input class="editable-inline amount" type="number" value="3000" oninput="recalc()" style="width:80px;text-align:right" /></td>
+          <td class="center">
+            <select class="editable-inline vat-sel" onchange="recalc()" style="width:90px">
+              <option value="zero" selected>0% Zero</option>
+              <option value="standard">5% Std</option>
+              <option value="oos">Out of Scope</option>
+            </select>
+          </td>
+          <td class="right vat-amt">0.00</td>
+          <td class="right line-total">3,000.00</td>
+          <td><button class="btn-del-row" onclick="deleteRow(this)" title="Remove">&#10005;</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Add Row Button -->
+    <div class="add-row-wrap">
+      <button class="btn btn-outline btn-sm" onclick="addRow()">+ Add Line Item</button>
+    </div>
+
+    <!-- Totals -->
+    <div class="totals-wrap">
+      <table class="totals-table">
+        <tr class="subtotal">
+          <td class="label">Subtotal</td>
+          <td class="amount" id="subtotal">AED 15,000.00</td>
+        </tr>
+        <tr class="vat-row">
+          <td class="label">VAT (0%)</td>
+          <td class="amount" id="vatTotal">AED 0.00</td>
+        </tr>
+        <tr class="grand">
+          <td class="label">TOTAL DUE</td>
+          <td class="amount" id="grandTotal">AED 15,000.00</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Amount in Words -->
+    <div class="amount-words">
+      Amount in Words: <span id="amountWords">Fifteen Thousand Dirhams Only (AED 15,000.00)</span>
+    </div>
+
+    <!-- Notes & Terms -->
+    <div class="notes-row">
+      <div class="notes-box">
+        <h4>Notes / Special Instructions</h4>
+        <textarea id="notes">1. Disbursement receipts (Lines 2 & 3) are attached to this invoice.
+2. Visa approval is subject to the relevant government authority.
+3. This invoice is issued upon signed service agreement.</textarea>
+      </div>
+      <div class="notes-box">
+        <h4>Terms &amp; Conditions</h4>
+        <textarea id="terms">1. Payment due within 7 days of invoice date.
+2. Consultancy fee (Line 1) is non-refundable once application is submitted.
+3. Disbursements (Lines 2–4) are refundable only if not yet paid to third parties.
+4. Disputes to be raised within 14 days of invoice date.</textarea>
+      </div>
+    </div>
+
+    <!-- Payment Details -->
+    <div class="payment-box">
+      <h4>Payment Details</h4>
+      <dl class="payment-grid">
+        <dt>Bank Name</dt>
+        <dd><input class="editable" value="Emirates NBD / Mashreq Bank" style="width:180px" /></dd>
+        <dt>Account Name</dt>
+        <dd><input class="editable" value="Upali Immigration Service Consultancy" style="width:220px" /></dd>
+        <dt>IBAN</dt>
+        <dd><input class="editable" value="AE XX XXXX XXXX XXXX XXXX XXX" style="width:200px" /></dd>
+        <dt>Currency</dt>
+        <dd>AED (UAE Dirham)</dd>
+        <dt>Reference</dt>
+        <dd><span id="payRef">UIC-2026-001</span></dd>
+      </dl>
+    </div>
+
+    <!-- Signatures -->
+    <div class="sig-row">
+      <div class="sig-box">
+        <div class="sig-line"></div>
+        <p>Authorised Signatory</p>
+        <strong>Upali Immigration Service Consultancy</strong>
+      </div>
+      <div class="sig-box">
+        <div class="sig-line"></div>
+        <p>Client Acknowledgement &amp; Signature</p>
+        <strong id="sigClientName">___________________________</strong>
+      </div>
+    </div>
+
+  </div><!-- /inv-body -->
+
+  <!-- Footer Band -->
+  <div class="inv-footer">
+    <p>Upali Immigration Service Consultancy &nbsp;|&nbsp; Dubai, UAE &nbsp;|&nbsp; info@upali.ae</p>
+    <div class="trn-badge">TRN: <span id="footerTRN">100XXXXXXXXXXX</span></div>
+    <p>This is a computer-generated Tax Invoice. Valid without a physical stamp.</p>
+  </div>
+
+</div><!-- /invoice -->
+
+<script>
+  /* ── Number helpers ── */
+  function fmt(n) {
+    return n.toLocaleString('en-AE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  /* ── Recalculate all totals ── */
+  function recalc() {
+    const rows = document.querySelectorAll('#lineItems tr');
+    let subtotal = 0, vatTotal = 0;
+
+    rows.forEach((row, i) => {
+      // update row number
+      row.cells[0].textContent = i + 1;
+
+      const amtInput = row.querySelector('.amount');
+      const vatSel   = row.querySelector('.vat-sel');
+      const vatCell  = row.querySelector('.vat-amt');
+      const totCell  = row.querySelector('.line-total');
+
+      if (!amtInput || !vatSel) return;
+
+      const amount = parseFloat(amtInput.value) || 0;
+      let   vat    = 0;
+      let   vatStr = '';
+
+      if (vatSel.value === 'standard') {
+        vat    = amount * 0.05;
+        vatStr = fmt(vat);
+      } else if (vatSel.value === 'zero') {
+        vat    = 0;
+        vatStr = '0.00';
+      } else {
+        vat    = 0;
+        vatStr = '—';
+      }
+
+      vatCell.textContent  = vatStr;
+      totCell.textContent  = fmt(amount + vat);
+      subtotal += amount;
+      vatTotal += vat;
+    });
+
+    const grand = subtotal + vatTotal;
+    document.getElementById('subtotal').textContent  = 'AED ' + fmt(subtotal);
+    document.getElementById('vatTotal').textContent  = 'AED ' + fmt(vatTotal);
+    document.getElementById('grandTotal').textContent = 'AED ' + fmt(grand);
+    document.getElementById('amountWords').textContent = toWords(grand) + ' (AED ' + fmt(grand) + ')';
+
+    // sync payment reference
+    const invNo = document.getElementById('invNo').value;
+    document.getElementById('payRef').textContent = invNo;
+    document.querySelectorAll('.editable-inv').forEach(el => {
+      if (el.id === 'invNo') document.getElementById('footerTRN').textContent =
+        document.getElementById('supplierTRN').value;
+    });
+  }
+
+  /* ── Sync TRN in footer ── */
+  document.getElementById('supplierTRN').addEventListener('input', function() {
+    document.getElementById('footerTRN').textContent = this.value;
+  });
+  document.getElementById('invNo').addEventListener('input', function() {
+    document.getElementById('payRef').textContent = this.value;
+  });
+  document.getElementById('clientName').addEventListener('input', function() {
+    document.getElementById('sigClientName').textContent = this.value || '___________________________';
+  });
+
+  /* ── Add Row ── */
+  function addRow() {
+    const tbody = document.getElementById('lineItems');
+    const rowCount = tbody.rows.length + 1;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${rowCount}</td>
+      <td>
+        <div class="desc-main">
+          <input class="editable" style="font-weight:600;color:#1a5c2b" placeholder="Service / item description" value="" />
+        </div>
+        <div class="desc-sub">
+          <input class="editable" placeholder="Additional detail (optional)" value="" />
+        </div>
+      </td>
+      <td class="right"><input class="editable-inline amount" type="number" value="0" oninput="recalc()" style="width:80px;text-align:right" /></td>
+      <td class="center">
+        <select class="editable-inline vat-sel" onchange="recalc()" style="width:90px">
+          <option value="zero">0% Zero</option>
+          <option value="standard">5% Std</option>
+          <option value="oos" selected>Out of Scope</option>
+        </select>
+      </td>
+      <td class="right vat-amt">—</td>
+      <td class="right line-total">0.00</td>
+      <td><button class="btn-del-row" onclick="deleteRow(this)" title="Remove">&#10005;</button></td>
+    `;
+    tbody.appendChild(tr);
+    recalc();
+  }
+
+  /* ── Delete Row ── */
+  function deleteRow(btn) {
+    btn.closest('tr').remove();
+    recalc();
+  }
+
+  /* ── Clear / New Invoice ── */
+  function clearForm() {
+    if (!confirm('Start a new invoice? This will clear all client details and reset line items.')) return;
+    document.getElementById('clientName').value  = '';
+    document.getElementById('passportNo').value  = '';
+    document.getElementById('nationality').value = '';
+    document.getElementById('clientAddr').value  = '';
+    document.getElementById('clientPhone').value = '';
+    document.getElementById('clientEmail').value = '';
+
+    // auto-increment invoice number
+    const cur = document.getElementById('invNo').value;
+    const match = cur.match(/(\d+)$/);
+    if (match) {
+      const next = String(parseInt(match[1]) + 1).padStart(3, '0');
+      document.getElementById('invNo').value = cur.replace(/\d+$/, next);
+    }
+
+    // reset date to today
+    const today = new Date().toISOString().slice(0, 10);
+    document.getElementById('invDate').value = today;
+    document.getElementById('supplyDate').value = today;
+
+    document.getElementById('sigClientName').textContent = '___________________________';
+    recalc();
+  }
+
+  /* ── Number to words (AED) — simplified up to millions ── */
+  function toWords(n) {
+    const ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine',
+                  'Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen',
+                  'Seventeen','Eighteen','Nineteen'];
+    const tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+
+    function below1000(num) {
+      if (num === 0) return '';
+      if (num < 20) return ones[num];
+      if (num < 100) return tens[Math.floor(num/10)] + (num%10 ? ' ' + ones[num%10] : '');
+      return ones[Math.floor(num/100)] + ' Hundred' + (num%100 ? ' ' + below1000(num%100) : '');
+    }
+
+    const whole = Math.floor(n);
+    const dec   = Math.round((n - whole) * 100);
+    let result  = '';
+
+    if (whole === 0) { result = 'Zero'; }
+    else {
+      if (Math.floor(whole/1000000)) result += below1000(Math.floor(whole/1000000)) + ' Million ';
+      if (Math.floor((whole%1000000)/1000)) result += below1000(Math.floor((whole%1000000)/1000)) + ' Thousand ';
+      if (whole%1000) result += below1000(whole%1000);
+    }
+
+    result = result.trim() + ' Dirhams';
+    if (dec > 0) result += ' and ' + below1000(dec) + ' Fils';
+    result += ' Only';
+    return result;
+  }
+
+  // Initial calculation on load
+  recalc();
+</script>
+</body>
+</html>
