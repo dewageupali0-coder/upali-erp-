@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback Document – Ms. Bismi</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px 16px;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 48px 52px;
+    }
+
+    /* Header */
+    .doc-header {
+      text-align: center;
+      border-bottom: 3px solid #673ab7;
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .doc-header h1 {
+      font-size: 22px;
+      color: #673ab7;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .doc-header p {
+      font-size: 13px;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    /* Staff line */
+    .staff-line {
+      background: #ede7f6;
+      border-left: 5px solid #673ab7;
+      padding: 12px 16px;
+      margin-bottom: 28px;
+      font-size: 14px;
+      color: #311b92;
+    }
+
+    .staff-line strong {
+      font-size: 15px;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead tr {
+      background: #673ab7;
+      color: #fff;
+    }
+
+    thead th {
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    tbody tr:nth-child(even) { background: #f9f6ff; }
+    tbody tr:nth-child(odd)  { background: #ffffff; }
+
+    tbody tr:hover { background: #ede7f6; }
+
+    td {
+      padding: 11px 14px;
+      vertical-align: top;
+      color: #202124;
+      border-bottom: 1px solid #e8e0f7;
+    }
+
+    td:first-child {
+      font-weight: 600;
+      color: #4a148c;
+      white-space: nowrap;
+      width: 36%;
+    }
+
+    td:last-child {
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 32px;
+      border-top: 1px solid #ddd;
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* Print */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { border: none; padding: 20px; }
+      .no-print { display: none; }
+    }
+
+    /* Print button */
+    .print-btn {
+      display: block;
+      margin: 20px auto 0;
+      background: #673ab7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 30px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .print-btn:hover { background: #512da8; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="doc-header">
+    <h1>Service Feedback Document</h1>
+    <p>Bank Account Opening Assistance &nbsp;|&nbsp; Upali ERP</p>
+  </div>
+
+  <div class="staff-line">
+    Feedback submitted for: &nbsp;<strong>Ms. Bismi</strong> &nbsp;–&nbsp; Bank Account Opening, Relationship Officer
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Your Response</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td>Upali Dewage</td>
+      </tr>
+      <tr>
+        <td>Company</td>
+        <td>Upali Immigration Consultant LLC</td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td>April 23, 2026</td>
+      </tr>
+      <tr>
+        <td>Overall Rating</td>
+        <td>⭐⭐⭐⭐⭐ &nbsp;(5 / 5)</td>
+      </tr>
+      <tr>
+        <td>Professionalism</td>
+        <td>Excellent – very professional and courteous throughout</td>
+      </tr>
+      <tr>
+        <td>Knowledge</td>
+        <td>Very knowledgeable – answered all queries confidently</td>
+      </tr>
+      <tr>
+        <td>Speed &amp; Efficiency</td>
+        <td>5 / 5 &nbsp;(Remarkably fast)</td>
+      </tr>
+      <tr>
+        <td>Strengths</td>
+        <td>All 6 checked &nbsp;(A-Z complete guidance)</td>
+      </tr>
+      <tr>
+        <td>Recommend Ms. Bismi</td>
+        <td>Definitely Yes – 100%</td>
+      </tr>
+      <tr>
+        <td>Highlight</td>
+        <td>A-Z guidance without any time restrictions, seamless experience</td>
+      </tr>
+      <tr>
+        <td>Suggestion</td>
+        <td>Ms. Bismi deserves a senior leadership position to support more customers and grow the banking industry</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <span>Upali Immigration Consultant LLC</span>
+    <span>Date: April 23, 2026</span>
+    <span>Prepared by: Upali Dewage</span>
+  </div>
+
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+</body>
+</html>
