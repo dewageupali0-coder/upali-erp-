@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abu Dhabi Training License — Compliance Checklist</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6fb; color: #222; }
+
+    .page { max-width: 900px; margin: 30px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.10); overflow: hidden; }
+
+    /* Header */
+    .header { background: linear-gradient(135deg, #1a3a5c 0%, #2563a8 100%); color: #fff; padding: 32px 40px 24px; }
+    .header-top { display: flex; align-items: center; gap: 18px; margin-bottom: 10px; }
+    .header-icon { width: 52px; height: 52px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+    .header h1 { font-size: 1.5rem; font-weight: 700; }
+    .header h2 { font-size: 1.05rem; font-weight: 400; opacity: 0.85; margin-top: 2px; }
+    .header-meta { display: flex; gap: 30px; margin-top: 16px; font-size: 0.88rem; opacity: 0.85; }
+    .header-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Facility Info Box */
+    .info-box { background: #eaf1fb; border-left: 4px solid #2563a8; margin: 24px 40px 0; border-radius: 8px; padding: 16px 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .info-field label { font-size: 0.75rem; color: #555; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+    .info-field input { width: 100%; border: none; border-bottom: 1.5px solid #2563a8; background: transparent; font-size: 0.95rem; padding: 2px 4px; color: #1a3a5c; font-weight: 600; outline: none; }
+
+    /* Section */
+    .section { margin: 24px 40px; }
+    .section-title { font-size: 1rem; font-weight: 700; color: #1a3a5c; background: #eaf1fb; border-radius: 7px; padding: 10px 16px; margin-bottom: 0; display: flex; align-items: center; gap: 10px; border-left: 4px solid #2563a8; }
+    .section-title .badge { background: #2563a8; color: #fff; font-size: 0.78rem; border-radius: 20px; padding: 2px 10px; font-weight: 600; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin-top: 2px; }
+    thead tr { background: #1a3a5c; color: #fff; }
+    thead th { padding: 9px 12px; font-size: 0.82rem; font-weight: 600; text-align: left; letter-spacing: 0.3px; }
+    thead th:last-child { text-align: center; width: 90px; }
+    tbody tr { border-bottom: 1px solid #e8edf5; }
+    tbody tr:nth-child(even) { background: #f7f9fd; }
+    tbody tr:hover { background: #eaf1fb; }
+    td { padding: 9px 12px; font-size: 0.88rem; vertical-align: middle; }
+    td.item-no { font-weight: 700; color: #2563a8; width: 36px; }
+    td.priority { width: 80px; }
+    td.status-cell { text-align: center; }
+    .check-box { width: 22px; height: 22px; border: 2px solid #2563a8; border-radius: 5px; display: inline-block; cursor: pointer; background: #fff; vertical-align: middle; }
+
+    /* Priority badges */
+    .pri { display: inline-block; border-radius: 20px; padding: 2px 10px; font-size: 0.75rem; font-weight: 700; }
+    .pri-high { background: #fde8e8; color: #c0392b; }
+    .pri-medium { background: #fef3cd; color: #b7770d; }
+    .pri-low { background: #e8f8e8; color: #1e8449; }
+
+    /* Status dropdown */
+    select { border: 1.5px solid #c8d6ea; border-radius: 5px; padding: 3px 6px; font-size: 0.82rem; color: #333; background: #fff; outline: none; cursor: pointer; }
+
+    /* Notes row */
+    .notes-row td { padding: 4px 12px 10px 36px; color: #666; font-size: 0.80rem; font-style: italic; }
+
+    /* Summary box */
+    .summary { margin: 24px 40px; background: #1a3a5c; color: #fff; border-radius: 10px; padding: 20px 28px; display: flex; gap: 30px; justify-content: space-between; align-items: center; }
+    .summary-item { text-align: center; }
+    .summary-item .num { font-size: 2rem; font-weight: 800; }
+    .summary-item .lbl { font-size: 0.78rem; opacity: 0.8; margin-top: 2px; }
+    .summary-item.green .num { color: #5dde7a; }
+    .summary-item.orange .num { color: #f5c542; }
+    .summary-item.red .num { color: #f57c5d; }
+    .summary-divider { width: 1px; background: rgba(255,255,255,0.2); height: 50px; }
+
+    /* Signature area */
+    .sig-area { margin: 16px 40px 32px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .sig-box { border: 1.5px solid #c8d6ea; border-radius: 8px; padding: 14px 16px; }
+    .sig-box label { font-size: 0.75rem; color: #555; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; display: block; margin-bottom: 30px; }
+    .sig-line { border-top: 1.5px solid #aaa; margin-top: 10px; padding-top: 6px; font-size: 0.78rem; color: #777; }
+
+    /* Footer */
+    .footer { background: #f4f6fb; border-top: 1px solid #e0e7f0; padding: 14px 40px; font-size: 0.78rem; color: #888; display: flex; justify-content: space-between; }
+
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      .no-print { display: none !important; }
+      select { border: none; -webkit-appearance: none; }
+    }
+
+    /* Print button */
+    .print-btn { display: block; margin: 0 auto 24px; background: #2563a8; color: #fff; border: none; border-radius: 8px; padding: 12px 36px; font-size: 1rem; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; }
+    .print-btn:hover { background: #1a3a5c; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div class="header-icon">📋</div>
+      <div>
+        <h1>Abu Dhabi Training License — Compliance Checklist</h1>
+        <h2>MSA Middle East | Training Facility Internal Review</h2>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span>📅 Review Date: <strong id="todayDate"></strong></span>
+      <span>🏢 Location: <strong>Abu Dhabi, UAE</strong></span>
+      <span>📄 Version: <strong>1.0</strong></span>
+    </div>
+  </div>
+
+  <!-- Facility Info -->
+  <div class="info-box">
+    <div class="info-field">
+      <label>Facility Name</label>
+      <input type="text" placeholder="Enter facility name" />
+    </div>
+    <div class="info-field">
+      <label>License Number</label>
+      <input type="text" placeholder="Enter license number" />
+    </div>
+    <div class="info-field">
+      <label>License Expiry Date</label>
+      <input type="text" placeholder="DD / MM / YYYY" />
+    </div>
+    <div class="info-field">
+      <label>Reviewed By</label>
+      <input type="text" placeholder="Name & designation" />
+    </div>
+    <div class="info-field">
+      <label>Accrediting Authority</label>
+      <input type="text" placeholder="e.g. ACTVET / ADEK" />
+    </div>
+    <div class="info-field">
+      <label>Next Review Due</label>
+      <input type="text" placeholder="DD / MM / YYYY" />
+    </div>
+  </div>
+
+  <!-- Section 1: License & Registration -->
+  <div class="section">
+    <div class="section-title">
+      🏛️ &nbsp;Section 1: License &amp; Registration
+      <span class="badge">4 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">1.1</td>
+          <td>Training license is active and displayed at facility</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Original license visible at reception</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">1.2</td>
+          <td>License scope matches actual training services delivered</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Compare approved course list vs active courses</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">1.3</td>
+          <td>Trade license registered with DED / ADGM Abu Dhabi</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Copy of DED trade license on file</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">1.4</td>
+          <td>License renewal scheduled 60 days before expiry</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Renewal reminder set in calendar system</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 2: Accreditation -->
+  <div class="section">
+    <div class="section-title">
+      🎓 &nbsp;Section 2: ACTVET / ADEK Accreditation
+      <span class="badge">4 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">2.1</td>
+          <td>Accreditation certificate is valid and displayed</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Certificate expiry date confirmed</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">2.2</td>
+          <td>All delivered courses are on the approved course list</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Approved course register vs active schedule</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">2.3</td>
+          <td>Annual activity report submitted to authority</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Submission receipt / acknowledgement on file</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">2.4</td>
+          <td>Any changes (location, courses, trainers) reported to authority</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Change notification letters on file</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 3: Qualified Trainers -->
+  <div class="section">
+    <div class="section-title">
+      👨‍🏫 &nbsp;Section 3: Qualified Trainers
+      <span class="badge">5 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">3.1</td>
+          <td>All trainers hold ACTVET/ADEK recognized qualifications</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Copies of degrees/certificates per trainer</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">3.2</td>
+          <td>Trainer CVs and credentials submitted to authority</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Submission confirmation on file per trainer</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">3.3</td>
+          <td>Trainer-to-student ratio meets regulatory standards</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Current ratio documented per course</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">3.4</td>
+          <td>Trainer employment contracts / agreements in place</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Signed contracts in HR file per trainer</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">3.5</td>
+          <td>Trainer UAE residency visa and Emirates ID valid</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Copy of valid visa page + Emirates ID per trainer</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 4: Facility Standards -->
+  <div class="section">
+    <div class="section-title">
+      🏢 &nbsp;Section 4: Facility &amp; Safety Standards
+      <span class="badge">5 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">4.1</td>
+          <td>Classroom size and seating meets minimum requirements</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Floor plan with sq.m per student documented</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">4.2</td>
+          <td>Civil Defense / Fire Safety approval is current</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Civil Defense certificate + expiry date</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">4.3</td>
+          <td>First aid kit available and stocked at facility</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>First aid kit inspection log</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">4.4</td>
+          <td>Required training equipment and resources available</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Equipment inventory list per course</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">4.5</td>
+          <td>Emergency exits clearly marked and unobstructed</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Physical inspection + photo evidence</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 5: Curriculum & Delivery -->
+  <div class="section">
+    <div class="section-title">
+      📚 &nbsp;Section 5: Curriculum &amp; Course Delivery
+      <span class="badge">4 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">5.1</td>
+          <td>Training content pre-approved by licensing authority</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Approved syllabus document per course</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">5.2</td>
+          <td>Course duration (contact hours) matches registered hours</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Course schedule vs approved hours comparison</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">5.3</td>
+          <td>No courses delivered outside of approved course list</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Audit current schedule vs license approved list</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">5.4</td>
+          <td>Training materials and handouts current and accurate</td>
+          <td class="priority"><span class="pri pri-low">LOW</span></td>
+          <td>Content review sign-off by lead trainer</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 6: Student Records -->
+  <div class="section">
+    <div class="section-title">
+      🗂️ &nbsp;Section 6: Student Registration &amp; Records
+      <span class="badge">5 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">6.1</td>
+          <td>Student register maintained for all enrolled trainees</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Current student register accessible and updated</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">6.2</td>
+          <td>Attendance records maintained per course per student</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Signed attendance sheets per session</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">6.3</td>
+          <td>Student enrollment forms and ID copies on file</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>File per student with Emirates ID / passport copy</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">6.4</td>
+          <td>Records maintained for minimum 5 years</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Archive policy documented and applied</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">6.5</td>
+          <td>Assessment results and grades recorded per student</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Grading sheets / assessment records per course</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 7: Certificates -->
+  <div class="section">
+    <div class="section-title">
+      🏅 &nbsp;Section 7: Certificate Issuance
+      <span class="badge">4 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">7.1</td>
+          <td>Certificate templates pre-approved by authority</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Approved template on file with approval date</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">7.2</td>
+          <td>Certificates issued only for approved courses</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Certificate log vs approved course list check</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">7.3</td>
+          <td>Certificates issued only after minimum attendance fulfilled</td>
+          <td class="priority"><span class="pri pri-high">HIGH</span></td>
+          <td>Attendance % verified before certificate issuance</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">7.4</td>
+          <td>Certificate issuance log maintained (serial numbers)</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Certificate register with serial no. and recipient</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 8: Fees & Financial -->
+  <div class="section">
+    <div class="section-title">
+      💰 &nbsp;Section 8: Fees &amp; Financial Compliance
+      <span class="badge">3 Items</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compliance Requirement</th>
+          <th>Priority</th>
+          <th>Details / Evidence Required</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-no">8.1</td>
+          <td>Published fee schedule displayed at facility and website</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Printed fee schedule visible at reception</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">8.2</td>
+          <td>Refund policy documented and communicated to students</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Refund policy in enrollment agreement</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+        <tr>
+          <td class="item-no">8.3</td>
+          <td>Financial records available for regulatory inspection</td>
+          <td class="priority"><span class="pri pri-medium">MEDIUM</span></td>
+          <td>Invoices, receipts, and accounts up to date</td>
+          <td class="status-cell"><select><option>-- Select --</option><option>✅ Compliant</option><option>⚠️ Partial</option><option>❌ Non-Compliant</option><option>🔄 In Progress</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary">
+    <div class="summary-item">
+      <div class="num">34</div>
+      <div class="lbl">Total Items</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-item green">
+      <div class="num" id="compliantCount">–</div>
+      <div class="lbl">Compliant</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-item orange">
+      <div class="num" id="partialCount">–</div>
+      <div class="lbl">Partial / In Progress</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-item red">
+      <div class="num" id="nonCompliantCount">–</div>
+      <div class="lbl">Non-Compliant</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-item">
+      <div class="num" id="pendingCount">–</div>
+      <div class="lbl">Pending Review</div>
+    </div>
+  </div>
+
+  <!-- Signature Area -->
+  <div class="sig-area">
+    <div class="sig-box">
+      <label>Reviewed By</label>
+      <div class="sig-line">Name &amp; Signature / Date</div>
+    </div>
+    <div class="sig-box">
+      <label>Approved By (Manager)</label>
+      <div class="sig-line">Name &amp; Signature / Date</div>
+    </div>
+    <div class="sig-box">
+      <label>Next Review Scheduled</label>
+      <div class="sig-line">Date / Responsible Person</div>
+    </div>
+  </div>
+
+  <!-- Print Button -->
+  <button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>MSA Middle East — Abu Dhabi Training Facility | Compliance Checklist v1.0</span>
+    <span>Generated: <span id="footerDate"></span></span>
+  </div>
+
+</div>
+
+<script>
+  // Set today's date
+  const today = new Date();
+  const formatted = today.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+  document.getElementById('todayDate').textContent = formatted;
+  document.getElementById('footerDate').textContent = formatted;
+
+  // Live counter
+  function updateCounts() {
+    const selects = document.querySelectorAll('select');
+    let compliant = 0, partial = 0, nonCompliant = 0, pending = 0;
+    selects.forEach(s => {
+      const v = s.value;
+      if (v.includes('Compliant') && !v.includes('Non')) compliant++;
+      else if (v.includes('Partial') || v.includes('Progress')) partial++;
+      else if (v.includes('Non-Compliant')) nonCompliant++;
+      else pending++;
+    });
+    document.getElementById('compliantCount').textContent = compliant;
+    document.getElementById('partialCount').textContent = partial;
+    document.getElementById('nonCompliantCount').textContent = nonCompliant;
+    document.getElementById('pendingCount').textContent = pending;
+  }
+  document.querySelectorAll('select').forEach(s => s.addEventListener('change', updateCounts));
+  updateCounts();
+</script>
+
+</body>
+</html>
