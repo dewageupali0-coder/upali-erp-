@@ -183,16 +183,12 @@ input, select, textarea { font-family: inherit; }
 }
 
 .logo-img {
-    height: 52px;
-    width: 52px;
+    height: 56px;
+    width: auto;
     display: block;
     object-fit: contain;
     transition: transform 0.5s ease;
     flex-shrink: 0;
-    background: #ffffff;
-    border-radius: 50%;
-    padding: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .logo:hover .logo-img {
@@ -201,11 +197,9 @@ input, select, textarea { font-family: inherit; }
 
 .footer-brand .logo-img {
     height: 64px;
-    width: 64px;
-    background: #ffffff;
-    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
     padding: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 /* Responsive: hide redundant text on smaller screens (logo image already contains branding) */
@@ -3598,3 +3592,8 @@ input, select, textarea { font-family: inherit; }
     .play-button-circle { width: 60px; height: 60px; }
     .play-button-circle svg { width: 36px; height: 36px; }
 }
+
+/* Company registration */
+#company-registration h2{font-size:clamp(1.1rem,3vw,1.7rem);margin:0 0 20px;overflow-wrap:anywhere}#company-registration p{margin:12px auto;max-width:900px;line-height:1.65}#company-registration .registration-note{font-size:13px}#company-registration a,.license-box a{color:#0052cc;text-decoration:underline}.license-box>div:last-child{min-width:0;overflow-wrap:anywhere}
+#company-registration{background:#10243b;color:#e4edf7;scroll-margin-top:100px}#company-registration h2{color:#fff}#company-registration .trusted-label,#company-registration .trusted-item{color:#65d9f3}#company-registration a{color:#8be7ff}#company-registration .registration-note{color:#c5d4e5}@media(max-width:600px){#company-registration .container{padding-right:82px}#company-registration .trusted-logos{gap:20px}}
+#company-registration .trusted-item{white-space:normal;overflow-wrap:anywhere;min-width:0;text-align:center}@media(max-width:600px){#company-registration .container{width:auto;margin-left:0;margin-right:76px;padding:0 20px}#company-registration .trusted-logos{display:flex;flex-direction:column;align-items:stretch}#company-registration p{width:auto}}

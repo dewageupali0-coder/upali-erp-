@@ -72,6 +72,10 @@ chatClose.addEventListener('click', () => {
 
 // Chat bot responses
 const botResponses = {
+    'address': 'Our Sri Lanka office is at No. 178, Kurunagala Road, Kaladiya, Puttalam, Sri Lanka. Call +94 76 163 8311 before visiting.',
+    'registration': 'UPALI IMMIGRATION CONSULTANCY (PVT) LTD: Sri Lanka company number PV 00375984, incorporated 29 September 2026. See the company registration section for the certificate.',
+    'licence': 'The certificate on this website confirms company incorporation. It is not a foreign employment recruitment licence.',
+    'license': 'The certificate on this website confirms company incorporation. It is not a foreign employment recruitment licence.',
     'hello': 'Hello! Welcome to Upali Immigration Services. How can I help you today?',
     'hi': 'Hi there! I\'m here to help you with insurance for your migration journey. What would you like to know?',
     'price': 'Our plans start from just €29/month for Basic coverage. The Professional plan is €59/month and Family Premium is €99/month. Would you like details on any specific plan?',
@@ -84,13 +88,13 @@ const botResponses = {
     'claim': 'Claims can be filed through our online portal or app. Most claims are processed within 48 hours. For emergencies, call our 24/7 helpline.',
     'family': 'Our Family Premium plan at €99/month covers you, your spouse, and dependents. It includes maternity benefits, dental coverage, and more.',
     'visa': 'Yes! Our insurance documentation is accepted for visa applications in Germany, Netherlands, and all EU countries. We provide official certificates.',
-    'contact': 'You can reach us at +971 54 204 0298 or email info@myupali.lk. Our team responds within 2 hours during business hours.',
+    'contact': 'You can reach us in Sri Lanka at +94 76 163 8311, in the UAE at +971 54 204 0298, or email info@myupali.lk. Our team responds within 2 hours during business hours.',
     'cancel': 'You can upgrade anytime. Downgrades and cancellations require 30 days\' notice. We offer a full refund within the first 14 days.',
     'salary': 'Blue collar jobs offer €2,500/month with free accommodation, transportation, and insurance. Professional roles start from €4,000/month with premium benefits.',
     'job': 'We help Sri Lankan workers find jobs in construction, manufacturing, healthcare, IT, and more. Blue collar: €2,500/month with housing. Professional: from €4,000/month. Fill out our contact form to apply!',
     'work': 'We place Sri Lankan workers across Europe and USA. Blue collar roles start at €2,500/month with accommodation and transport included. Professional roles from €4,000/month.',
-    'sri lanka': 'We are Sri Lanka\'s premier migration service provider based in Puttalam. We help Sri Lankan workers migrate to Europe and USA with full support.',
-    'puttalam': 'Our head office is at Shams Free Zone, Sharjah Media City, Sharjah, UAE. Call us at +971 54 204 0298 for a consultation.',
+    'sri lanka': 'UPALI IMMIGRATION CONSULTANCY (PVT) LTD was incorporated in Sri Lanka on 29 September 2026. Company number: PV 00375984. Our certificate confirms incorporation, not a recruitment licence.',
+    'puttalam': 'Our Sri Lanka office is at No. 178, Kurunagala Road, Kaladiya, Puttalam, Sri Lanka. Call +94 76 163 8311 or email info@myupali.lk before visiting.',
     'accommodation': 'Yes! Blue collar job packages include free furnished accommodation. Professional roles include a housing allowance or relocation support.',
     'transport': 'Transportation to and from work is included free of charge for blue collar positions. Professional roles may include a travel stipend.',
     'ireland': 'We offer health insurance accepted across all HSE facilities in Ireland. Our plans comply with Irish immigration requirements.',
@@ -115,7 +119,10 @@ function getBotResponse(message) {
 function addMessage(text, type) {
     const div = document.createElement('div');
     div.className = `chat-message ${type}`;
-    div.innerHTML = `<div class="message-bubble">${text}</div>`;
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.textContent = text;
+    div.appendChild(bubble);
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
@@ -138,69 +145,21 @@ chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
 
-// ===== Contact Form — Zoho CRM Integration =====
-const ZOHO_ACTION = "https://crm.zoho.com/crm/WebToLeadForm";
-const ZOHO_HIDDEN = {
-    xnQsjsdp: "b7dd38c616890ab637d092c2fcc84d520c46213c1082535a0b3396a4d54c0896",
-    xmIwtLD: "819b0bf4fb446d94c6525b47f0cd999c6c4c644f408cd5c7324aa9d48f51036507cff38ec4c8ea33ab4c45469a772458",
-    actionType: "TGVhZHM=",
-    returnURL: "https://www.myupali.lk"
-};
-
+// ===== Contact Form: prepare an email; no false delivery confirmation =====
 const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-
-    // Submit to Zoho CRM via hidden iframe so page doesn't navigate away
-    const iframe = document.createElement('iframe');
-    iframe.name = 'zoho_submit_frame';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = ZOHO_ACTION;
-    form.target = 'zoho_submit_frame';
-    form.style.display = 'none';
-
-    const fields = {
-        ...ZOHO_HIDDEN,
-        'First Name': data.firstName || '',
-        'Last Name': data.lastName || data.firstName || '',
-        'Email': data.email || '',
-        'Mobile': data.phone || '',
-        'Nationality': data.nationality || '',
-        'Passport_No': data.passportNo || '',
-        'Date_of_Birth': data.dateOfBirth || '',
-        'Address - Country / Region': data.destination || '',
-        'Service_Required': data.serviceRequired || '',
-        'Description': data.message || ''
-    };
-
-    for (const k in fields) {
-        const input = document.createElement('input');
-        input.name = k;
-        input.value = fields[k];
-        form.appendChild(input);
+    const data = Object.fromEntries(new FormData(contactForm));
+    const body = Object.entries(data).map(([key, value]) => `${key}: ${value}`).join('\n');
+    window.location.href = `mailto:info@myupali.lk?subject=${encodeURIComponent('Website enquiry - Upali Immigration Consultancy')}&body=${encodeURIComponent(body)}`;
+    let status = document.getElementById('enquiryStatus');
+    if (!status) {
+        status = document.createElement('p');
+        status.id = 'enquiryStatus';
+        status.setAttribute('role', 'status');
+        contactForm.appendChild(status);
     }
-    document.body.appendChild(form);
-    form.submit();
-
-    // Show success message
-    const wrapper = document.querySelector('.contact-form-wrapper');
-    wrapper.innerHTML = `
-        <div style="text-align: center; padding: 60px 20px;">
-            <div style="width: 72px; height: 72px; background: #E6FFE6; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#38A169" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <h3 style="font-size: 24px; font-weight: 700; color: #1A202C; margin-bottom: 12px;">Application Submitted!</h3>
-            <p style="font-size: 16px; color: #718096; line-height: 1.6;">Thank you, <strong>${data.firstName}</strong>! Our team will review your application and contact you within 2 hours.</p>
-            <p style="font-size: 14px; color: #A0AEC0; margin-top: 16px;">Reference: MIG-${Date.now().toString(36).toUpperCase()}</p>
-        </div>
-    `;
+    status.textContent = 'Please review and send the message in your email app. If it did not open, email info@myupali.lk directly. This website has not sent your enquiry.';
 });
 
 // ===== Scroll Animations =====
@@ -335,7 +294,9 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
         }
@@ -348,7 +309,7 @@ const translations = {
         getQuote: 'Get a Quote',
         heroTitle: 'Your Gateway from Sri Lanka to Europe & USA',
         heroSubtitle: 'Upali Immigration Services helps Sri Lankan workers migrate to Germany, Netherlands, Ireland, Czech Republic, United Kingdom, New Zealand, and the USA with complete job placement, insurance, accommodation, and visa support.',
-        heroBadge: "Sri Lanka's No.1 Migration Service Provider",
+        heroBadge: "Incorporated in Sri Lanka | PV 00375984",
         heroBtn1: 'View Plans & Pricing',
         heroBtn2: 'Learn More',
         statWorkers: 'Workers Insured',
@@ -357,13 +318,13 @@ const translations = {
         servicesTag: 'Our Services',
         jobOpeningsTag: 'Now Hiring',
         jobOpeningsTitle: 'Current Job Openings Abroad',
-        contactBtn: 'Send Message & Get Quote',
+        contactBtn: 'Prepare Email Enquiry',
     },
     si: {
         getQuote: 'උපුටාගත් මිලක් ලබා ගන්න',
         heroTitle: 'ශ්‍රී ලංකාවෙන් යුරෝපයට සහ ඇමෙරිකාවට ඔබේ දොරටුව',
         heroSubtitle: 'උපාලි ආගමන සේවා ශ්‍රී ලාංකීය කම්කරුවන්ට ජර්මනිය, නෙදර්ලන්ත, අයර්ලන්තය සහ ඇමෙරිකාවට සංක්‍රමණය වීමට සම්පූර්ණ සහාය සපයයි.',
-        heroBadge: 'ශ්‍රී ලංකාවේ අංක 1 සංක්‍රමණ සේවා සපයන්නා',
+        heroBadge: 'ශ්‍රී ලංකාවේ සංස්ථාගත සමාගම | PV 00375984',
         heroBtn1: 'සැලසුම් & මිල ගණන් බලන්න',
         heroBtn2: 'තව දැනගන්න',
         statWorkers: 'රක්ෂිත කම්කරුවන්',
@@ -372,13 +333,13 @@ const translations = {
         servicesTag: 'අපගේ සේවාවන්',
         jobOpeningsTag: 'දැන් බඳවා ගනිමින්',
         jobOpeningsTitle: 'විදෙස් රැකියා ඉල්ලුම්',
-        contactBtn: 'පණිවිඩය යවා මිලක් ලබා ගන්න',
+        contactBtn: 'ඊමේල් විමසීම සකස් කරන්න',
     },
     ta: {
         getQuote: 'மேற்கோள் பெறுக',
         heroTitle: 'இலங்கையிலிருந்து ஐரோப்பா மற்றும் அமெரிக்காவுக்கான உங்கள் வாயில்',
         heroSubtitle: 'உபாலி குடியேற்ற சேவைகள் இலங்கை தொழிலாளர்களுக்கு ஜெர்மனி, நெதர்லாந்து, அயர்லாந்து மற்றும் அமெரிக்காவிற்கு குடியேற முழு உதவி வழங்குகிறது.',
-        heroBadge: 'இலங்கையின் நம்பர் 1 குடியேற்ற சேவை வழங்குனர்',
+        heroBadge: 'இலங்கையில் பதிவு செய்யப்பட்ட நிறுவனம் | PV 00375984',
         heroBtn1: 'திட்டங்கள் & விலை பார்க்க',
         heroBtn2: 'மேலும் அறிய',
         statWorkers: 'காப்பீடு செய்யப்பட்ட தொழிலாளர்கள்',
@@ -387,7 +348,7 @@ const translations = {
         servicesTag: 'எங்கள் சேவைகள்',
         jobOpeningsTag: 'இப்போது பணியமர்த்துகிறோம்',
         jobOpeningsTitle: 'தற்போதைய வெளிநாட்டு வேலை வாய்ப்புகள்',
-        contactBtn: 'செய்தி அனுப்பி மேற்கோள் பெறுக',
+        contactBtn: 'மின்னஞ்சல் விசாரணையைத் தயாரிக்கவும்',
     }
 };
 
@@ -410,7 +371,7 @@ function setLanguage(lang) {
 
     // Update key hero content
     const heroTitle = document.querySelector('.hero-content h1');
-    if (heroTitle) heroTitle.innerHTML = `<span>${t.heroTitle.split(' to ')[0]}</span> to<br><span class="gradient-text">${t.heroTitle.split(' to ')[1] || ''}</span>`;
+    if (heroTitle) heroTitle.textContent = t.heroTitle;
 
     const heroSubtitle = document.querySelector('.hero-subtitle');
     if (heroSubtitle) heroSubtitle.textContent = t.heroSubtitle;
